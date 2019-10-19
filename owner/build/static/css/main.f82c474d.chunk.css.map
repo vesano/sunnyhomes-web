@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.css"],"names":[],"mappings":"AAAA,yBACI,YACJ,CAEA,gBACI,UAAW,CACX,SACJ,CAEA,8BACI,oBACJ,CAXA,mCACI,0BAA4B,CAA5B,0BACJ,CAEA,kDACI,gBACJ","file":"main.f82c474d.chunk.css","sourcesContent":[".calendar-container .rbc-month-row {\n    overflow: initial !important;\n}\n\n.calendar-container .rbc-month-row .rbc-date-cell {\n    min-height: 100px\n}\n"]}

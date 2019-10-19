@@ -10,8 +10,10 @@ npm-debug.log*
 
 admin/package-lock.json
 api/package-lock.json
+owner/package-lock.json
 
 admin/src/parameters.js
+owner/src/parameters.js
 api/parameters.js
 
 docker-compose.yml
