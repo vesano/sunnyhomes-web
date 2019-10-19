@@ -1,4 +1,4 @@
-const prefix = 'Profile'
+const prefix = 'Booking'
 
 export const FETCH_BEFORE = prefix + '/FETCH_BEFORE';
 export const FETCH_SUCCESS = prefix + '/FETCH_SUCCESS';

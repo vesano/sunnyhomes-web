@@ -1,11 +1,12 @@
 const express = require('express');
 const Admin = require('../../database/model/Admin').Admin;
 const logger = require('../../logger');
+const isAdmin = require('../services/AuthService').isAdmin;
 const checkId = require('../services/RequestParamsValidator').checkId;
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/admins', async (req, res) => {
+router.get('/admins', isAdmin, async (req, res) => {
 
   try {
 
@@ -24,7 +25,7 @@ router.get('/admins', async (req, res) => {
   }
 })
 
-router.get('/admins/:id', checkId, async (req, res) => {
+router.get('/admins/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
@@ -45,7 +46,7 @@ router.get('/admins/:id', checkId, async (req, res) => {
   }
 })
 
-router.delete('/admins/:id', checkId, async (req, res) => {
+router.delete('/admins/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
@@ -61,7 +62,7 @@ router.delete('/admins/:id', checkId, async (req, res) => {
   }
 })
 
-router.post('/admins', async (req, res) => {
+router.post('/admins', isAdmin, async (req, res) => {
 
   try {
 
@@ -91,7 +92,7 @@ router.post('/admins', async (req, res) => {
   }
 })
 
-router.put('/admins/:id', checkId, async (req, res) => {
+router.put('/admins/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 

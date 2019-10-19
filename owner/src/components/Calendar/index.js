@@ -11,10 +11,9 @@ const MyCalendar = props => (
   <div className="calendar-container">
     <Calendar
       localizer={localizer}
-      events={[]}
       step={60}
       showMultiDayTimes
-    />
+      {...props}/>
   </div>
 )
 

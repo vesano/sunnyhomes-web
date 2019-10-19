@@ -12,6 +12,7 @@ import Footer from '../components/Footer';
 import Login from '../screens/Login/components';
 import Profile from '../screens/Profile/components';
 import Calendar from '../screens/Calendar/components';
+import Booking from '../screens/Booking/components';
 
 export function createRouter(store) {
 
@@ -63,6 +64,9 @@ export function createRouter(store) {
         <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
 
         <PrivateRoute exact path={Pages.HOME} component={Calendar}/>
+
+        <PrivateRoute exact path={Pages.BOOKING_NEW} component={Booking}/>
+        <PrivateRoute path={Pages.BOOKING_EDIT} component={Booking}/>
 
         <Redirect path="*" to={Pages.HOME}/>
 

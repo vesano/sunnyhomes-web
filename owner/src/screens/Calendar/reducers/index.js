@@ -1,5 +1,24 @@
 import {combineReducers} from 'redux'
 import * as Action from '../actions'
+import moment from 'moment'
+
+const events = (prev = [], action) => {
+  switch (action.type) {
+    case Action.FETCH_SUCCESS:
+      return action.payload.bookings.map(item => {
+
+        return {
+          title: item.type,
+          start: moment(item.arrival, 'YYYY-MM-DD'),
+          end: moment(item.departure, 'YYYY-MM-DD'),
+          allDay: false,
+          resource: item
+        }
+      })
+    default:
+      return prev
+  }
+}
 
 const isLoading = (prev = false, action) => {
   switch (action.type) {
@@ -18,5 +37,6 @@ const isLoading = (prev = false, action) => {
 
 export default combineReducers({
   isLoading,
+  events,
 })
 

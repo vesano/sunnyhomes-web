@@ -5,6 +5,7 @@ import App from './App';
 import Login from '../screens/Login/reducers';
 import Profile from '../screens/Profile/reducers';
 import Calendar from '../screens/Calendar/reducers';
+import Booking from '../screens/Booking/reducers';
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -12,6 +13,7 @@ const createRootReducer = (history) => combineReducers({
   Login,
   Profile,
   Calendar,
+  Booking,
 });
 
 export default createRootReducer

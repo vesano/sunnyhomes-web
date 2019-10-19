@@ -2,10 +2,11 @@ const express = require('express');
 const Owner = require('../../database/model/Owner').Owner;
 const logger = require('../../logger');
 const checkId = require('../services/RequestParamsValidator').checkId;
+const isAdmin = require('../services/AuthService').isAdmin;
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/owners', async (req, res) => {
+router.get('/owners', isAdmin, async (req, res) => {
 
   try {
 
@@ -24,7 +25,7 @@ router.get('/owners', async (req, res) => {
   }
 })
 
-router.get('/owners/:id', checkId, async (req, res) => {
+router.get('/owners/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
@@ -45,7 +46,7 @@ router.get('/owners/:id', checkId, async (req, res) => {
   }
 })
 
-router.delete('/owners/:id', checkId, async (req, res) => {
+router.delete('/owners/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
@@ -61,7 +62,7 @@ router.delete('/owners/:id', checkId, async (req, res) => {
   }
 })
 
-router.post('/owners', async (req, res) => {
+router.post('/owners', isAdmin, async (req, res) => {
 
   try {
 
@@ -91,7 +92,7 @@ router.post('/owners', async (req, res) => {
   }
 })
 
-router.put('/owners/:id', checkId, async (req, res) => {
+router.put('/owners/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 

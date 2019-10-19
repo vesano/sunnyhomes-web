@@ -2,10 +2,11 @@ const express = require('express');
 const Owner = require('../../database/model/Owner').Owner;
 const Admin = require('../../database/model/Admin').Admin;
 const logger = require('../../logger');
+const isAuthenticated = require('../services/AuthService').isAuthenticated;
 
 const router = new express.Router({mergeParams: true});
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', isAuthenticated, async (req, res) => {
 
   try {
 
@@ -37,7 +38,7 @@ router.get('/profile', async (req, res) => {
   }
 })
 
-router.post('/profile', async (req, res) => {
+router.post('/profile', isAuthenticated, async (req, res) => {
 
   try {
 

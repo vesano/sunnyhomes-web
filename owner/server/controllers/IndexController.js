@@ -8,6 +8,9 @@ const routes = [
 
   '/profile',
 
+  '/booking/new',
+  '/booking/:id',
+
   '/login',
 
   '/logout',
