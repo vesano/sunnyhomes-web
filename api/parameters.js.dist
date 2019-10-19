@@ -1,0 +1,24 @@
+const env = process.env.NODE_ENV || 'production'
+
+const config = {
+  development: {
+    port: 80,
+    host: 'http://0.0.0.0:7600',
+    mongoHost: 'mongodb://db/sunnyhomes',
+    secret: '****',
+    smoobu: {
+      apiKey: '****'
+    }
+  },
+  production: {
+    port: 80,
+    host: 'http://api.sunnyhomes.com.cy',
+    mongoHost: 'mongodb://db/sunnyhomes',
+    secret: '****',
+    smoobu: {
+      apiKey: '****'
+    }
+  }
+}
+
+module.exports = config[env]

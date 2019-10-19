@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd ..
+
+#docker-compose exec owner npm rebuild node-sass
+
+docker-compose exec owner npm "$@"

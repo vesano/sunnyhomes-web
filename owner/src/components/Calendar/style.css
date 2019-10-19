@@ -1,0 +1,7 @@
+.calendar-container .rbc-month-row {
+    overflow: initial !important;
+}
+
+.calendar-container .rbc-month-row .rbc-date-cell {
+    min-height: 100px
+}

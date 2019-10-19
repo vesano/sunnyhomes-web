@@ -1,0 +1,235 @@
+/* Start global styles */
+
+ul.simple {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* End global styles */
+
+/* Start custom components */
+
+.banner {
+    margin: 30px auto;
+    text-align: center;
+}
+
+.banner h4 {
+    color: grey;
+    font-size: 1.2rem;
+}
+
+.banner img {
+    padding: 10px;
+    max-width: 150px;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 400px
+}
+
+label.required:after {
+    content: ' *';
+    color: red
+}
+
+.map-container, .map-container > .map {
+    width: 100%;
+    min-height: 300px;
+}
+
+/* End custom components */
+
+/* Start bootstrap components */
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.form-group {
+    min-width: 200px;
+}
+
+.badge-light {
+    background: #d4d4d4;
+}
+
+.badge.badge-outline-dark {
+    border: 1px solid black
+}
+
+/* End bootstrap components */
+
+.rating-star {
+    color: #b49b14
+}
+
+.bg-white-15 {
+    background: rgba(55, 125, 255, 0.15)
+}
+
+.bg-white-35 {
+    background: rgba(55, 125, 255, 0.35)
+}
+
+.fg-yellow-light {
+    color: #fff335 !important;
+}
+
+.btn-primary,
+.btn-primary:not([href]),
+.btn-primary:not([href]):not([href]):not(:disabled):not(.disabled) {
+    border-color: #37629a;
+    background: #244065;
+}
+
+.btn-outline-primary,
+.btn-outline-primary:not([href]),
+.btn-outline-primary:not([href]):not([href]):not(:disabled):not(.disabled) {
+    border-color: #244065;
+    color: #244065;
+    background-color: white;
+}
+
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled {
+    border-color: #244065aa;
+    color: #244065aa;
+    background-color: #c8c8c8;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    border-color: #37629aaa;
+    background: #244065aa;
+}
+
+.btn-soft-primary[href]:hover,
+.btn-soft-primary[href]:focus,
+.btn-soft-primary[href]:active,
+.btn-soft-primary[href].active,
+.btn-soft-primary[type]:hover,
+.btn-soft-primary[type]:focus,
+.btn-soft-primary[type]:active,
+.btn-soft-primary[type].active {
+    background: #244065 !important;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    color: #fff !important;
+    background-color: #325c92 !important;
+    border-color: #2d5280 !important;
+}
+
+.gradient-half-primary-v6 {
+    background-image: linear-gradient(150deg, #244065 0%, #19a0ff 100%);
+    background-repeat: repeat-x;
+}
+
+select.form-control,
+input.form-control {
+    height: 40px !important;
+}
+
+select.form-control-sm,
+input.form-control-sm {
+    height: 30px !important;
+    padding: 2px 10px !important;
+}
+
+.input-group select.form-control,
+.input-group input.form-control {
+    height: initial !important;
+}
+
+.shadow-solid {
+    box-shadow: 0 10px 20px #565656;
+    -moz-box-shadow: 0 10px 20px #565656;
+    -webkit-box-shadow: 0 10px 20px #565656;
+}
+
+body > main.container {
+    margin-bottom: 40px
+}
+
+.steps .step:hover {
+    cursor: pointer;
+}
+
+.steps .step.active {
+    color: #377dff
+}
+
+#header,
+#header > .u-header__section {
+    min-height: 72px
+}
+
+#main-content {
+    margin-top: 72px !important;
+}
+
+@media (min-width: 576px) {
+    /* sm */
+    .bg-transparent-sm {
+        background-color: transparent !important;
+    }
+}
+
+@media (min-width: 768px) {
+    /* md */
+
+    .bg-transparent-md {
+        background-color: transparent !important;
+    }
+}
+
+@media (min-width: 992px) {
+    /* lg */
+    .bg-transparent-lg {
+        background-color: transparent !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* lg */
+    .bg-transparent-xl {
+        background-color: transparent !important;
+    }
+}
+
+.w-95 {
+    width: 95%
+}
+
+.selected-quote {
+    border: 2px solid #ffc107
+}
+
+.selected-quote .selected-mark {
+    position: absolute;
+    left: -25px;
+    top: -25px;
+    padding: 5px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #ffc107;
+    color: #00c9a7
+}
+
+blockquote {
+    -ms-word-break: break-all;
+    word-break: break-all;
+}
+
+blockquote.review {
+    max-height: 200px;
+    overflow: auto;
+}
+
+.root-spinner {
+    /*max-height: 100px;*/
+}
