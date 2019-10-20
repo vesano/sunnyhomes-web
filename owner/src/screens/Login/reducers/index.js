@@ -16,6 +16,9 @@ const email = (prev = null, action) => {
 
 const password = (prev = null, action) => {
   switch (action.type) {
+    case Action.LOGIN_SUCCESS:
+    case Action.LOGIN_CHECK_SUCCESS:
+      return null
     case Action.LOGIN_CREDENTIALS_CHANGED:
       if (action.payload.password !== undefined) {
         return action.payload.password

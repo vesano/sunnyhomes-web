@@ -132,6 +132,7 @@ class Profile extends React.Component {
                     <div className="form-group">
                       <label className="m-0">{i18n.t('profile.phoneLandline')}</label>
                       <PhoneInput
+                        fieldId="profile.phoneLandline"
                         className="form-control"
                         onChange={this.changePhone('phoneLandline')}
                         value={model.phoneLandline || ''}/>
@@ -143,6 +144,7 @@ class Profile extends React.Component {
                     <div className="form-group">
                       <label className="m-0">{i18n.t('profile.phoneMobile')}</label>
                       <PhoneInput
+                        fieldId="profile.phoneMobile"
                         className="form-control"
                         onChange={this.changePhone('phoneMobile')}
                         value={model.phoneMobile || ''}/>
@@ -200,7 +202,6 @@ class Profile extends React.Component {
                   </div>
                 </div>
               </div>
-
 
               <div className="row">
                 <div className="col-12 col-md-4">

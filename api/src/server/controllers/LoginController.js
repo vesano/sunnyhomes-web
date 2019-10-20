@@ -6,7 +6,7 @@ const AuthService = require('../services/AuthService')
 
 const router = new express.Router({mergeParams: true});
 
-router.post('/login', async (req, res) => {
+router.post('/owner/login', async (req, res) => {
 
   try {
 
@@ -41,6 +41,30 @@ router.post('/login', async (req, res) => {
       }
     }
 
+    res.status(404).json({
+      message: 'No owner found by email/password'
+    })
+
+  } catch (e) {
+
+    logger.error(e);
+
+    res.status(e.code > 400 ? e.code : 500).json(e)
+  }
+})
+
+router.post('/admin/login', async (req, res) => {
+
+  try {
+
+    const {password, email} = req.body
+
+    if (!(email && password)) {
+      res.status(400).json({
+        message: 'Bad request'
+      })
+    }
+
     const admin = await Admin.findOne({email})
     if (admin) {
       if (admin.comparePassword(password)) {
@@ -65,7 +89,7 @@ router.post('/login', async (req, res) => {
     }
 
     res.status(404).json({
-      message: 'No user found by email/password'
+      message: 'No admin found by email/password'
     })
 
   } catch (e) {

@@ -28,7 +28,7 @@ if (!token) {
 
 const initial = {
   App: {
-    isAuthenticated: false,
+    isAuthenticated: !!token,
     isLoadingVisible: !!token,
     token,
   }

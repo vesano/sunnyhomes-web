@@ -1,27 +1,31 @@
 import request from 'axios'
 import parameters from '../../../parameters'
-import {LOGIN_BEFORE, LOGIN_FAILURE, LOGIN_SUCCESS} from '../actions'
+import {FETCH_BEFORE, FETCH_FAILURE, FETCH_SUCCESS} from '../actions'
 
-export default (email, password) => dispatch => {
+export default id => (dispatch, getState) => {
+
+  const token = getState().App.token
 
   dispatch({
-    type: LOGIN_BEFORE
+    type: FETCH_BEFORE
   })
 
-  request.post(parameters.apiHost + '/api/v1/admin/login', {email, password})
+  request.get(parameters.apiHost + '/api/v1/owners/' + id, {
+    headers: {
+      Authorization: token
+    }
+  })
     .then(({data}) => {
       dispatch({
-        type: LOGIN_SUCCESS,
+        type: FETCH_SUCCESS,
         payload: data
       })
     })
     .catch(e => {
-      console.log(e);
-
       if (!e.response) return
 
       dispatch({
-        type: LOGIN_FAILURE,
+        type: FETCH_FAILURE,
         payload: {
           status: e.response.status,
           data: e.response.data

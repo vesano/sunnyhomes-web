@@ -12,6 +12,7 @@ import Footer from '../components/Footer';
 import Login from '../screens/Login/components';
 import Profile from '../screens/Profile/components';
 import Owners from '../screens/Owners/components';
+import OwnerEdit from '../screens/OwnerEdit/components';
 import Admins from '../screens/Admins/components';
 import AdminEdit from '../screens/AdminEdit/components';
 
@@ -70,10 +71,10 @@ export function createRouter(store) {
           <PrivateRoute path={Pages.ADMINS_EDIT} component={AdminEdit}/>
 
           <PrivateRoute exact path={Pages.OWNERS} component={Owners}/>
-          <PrivateRoute exact path={Pages.OWNERS_NEW} component={Profile}/>
-          <PrivateRoute path={Pages.OWNERS_EDIT} component={Profile}/>
+          <PrivateRoute exact path={Pages.OWNERS_NEW} component={OwnerEdit}/>
+          <PrivateRoute path={Pages.OWNERS_EDIT} component={OwnerEdit}/>
 
-          <Redirect path="*" to={Pages.LOGIN}/>
+          <Redirect path="*" to={Pages.PROFILE}/>
 
         </Switch>
       </div>
