@@ -25,6 +25,7 @@ export default (model, changes) => {
 
   if (!model.surname) {
     ++validator.count
+
     if (changes.surname) {
       validator.errors.surname = i18n.t('validation.required')
     }
@@ -39,6 +40,25 @@ export default (model, changes) => {
     ++validator.count
     if (changes.email) {
       validator.errors.email = i18n.t('validation.invalid_email')
+    }
+  }
+
+  if (model.password1 && model.password2) {
+
+    if (!passwordSchema.validate(model.password1)) {
+      ++validator.count
+
+      if (changes.password1) {
+        validator.errors.password1 = i18n.t('validation.weak_password1')
+      }
+    }
+
+    if (model.password1 !== model.password2) {
+      ++validator.count
+
+      if (changes.password2) {
+        validator.errors.password2 = i18n.t('validation.password_mismatch')
+      }
     }
   }
 

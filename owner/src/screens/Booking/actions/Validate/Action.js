@@ -7,23 +7,23 @@ export default (model, changes) => {
     errors: {}
   }
 
-  if (changes.arrival) {
-    if (!model.arrival) {
-      ++validator.count
+  if (!model.arrival) {
+    ++validator.count
+    if (changes.arrival) {
       validator.errors.arrival = i18n.t('validation.required')
     }
   }
 
-  if (changes.departure) {
-    if (!model.departure) {
-      ++validator.count
+  if (!model.departure) {
+    ++validator.count
+    if (changes.departure) {
       validator.errors.departure = i18n.t('validation.required')
     }
   }
 
-  if (changes.type) {
-    if (!model.type) {
-      ++validator.count
+  if (!model.type) {
+    ++validator.count
+    if (changes.type) {
       validator.errors.type = i18n.t('validation.required')
     }
   }

@@ -10,7 +10,7 @@ class OwnerCard extends React.PureComponent {
     const {model} = this.props
 
     return <div className="col-3 col-lg-2">
-      <Link to={Pages.OWNERS_EDIT.replace(':id', model._id)}
+      <Link to={Pages.ADMINS_EDIT.replace(':id', model._id)}
             className="card shadow-sm mb-1 mr-1 transition-3d-hover">
         <div className="card-image">
           <img src="/img/fallout-thumb-up.png" alt="" className="img-fluid"/>

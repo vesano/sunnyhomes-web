@@ -13,6 +13,7 @@ import Login from '../screens/Login/components';
 import Profile from '../screens/Profile/components';
 import Owners from '../screens/Owners/components';
 import Admins from '../screens/Admins/components';
+import AdminEdit from '../screens/AdminEdit/components';
 
 export function createRouter(store) {
 
@@ -65,8 +66,8 @@ export function createRouter(store) {
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
 
           <PrivateRoute exact path={Pages.ADMINS} component={Admins}/>
-          <PrivateRoute exact path={Pages.ADMINS_NEW} component={Profile}/>
-          <PrivateRoute path={Pages.ADMINS_EDIT} component={Profile}/>
+          <PrivateRoute exact path={Pages.ADMINS_NEW} component={AdminEdit}/>
+          <PrivateRoute path={Pages.ADMINS_EDIT} component={AdminEdit}/>
 
           <PrivateRoute exact path={Pages.OWNERS} component={Owners}/>
           <PrivateRoute exact path={Pages.OWNERS_NEW} component={Profile}/>

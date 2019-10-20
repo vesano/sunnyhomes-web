@@ -1,13 +1,5 @@
 import i18n from '../../../../i18n'
 import EmailValidator from 'email-validator'
-import PasswordValidator from 'password-validator'
-
-const passwordSchema = new PasswordValidator();
-
-passwordSchema
-  .is().min(8)
-  .is().max(100)
-  .has().not().spaces()
 
 export default (model, changes) => {
   const validator = {
@@ -16,40 +8,42 @@ export default (model, changes) => {
     errors: {}
   }
 
-  if (changes.name) {
-    if (!model.name) {
-      ++validator.count
+  if (!model.name) {
+    ++validator.count
+    if (changes.name) {
       validator.errors.name = i18n.t('validation.required')
     }
   }
 
-  if (changes.surname) {
-    if (!model.surname) {
-      ++validator.count
+  if (!model.surname) {
+    ++validator.count
+    if (changes.surname) {
       validator.errors.surname = i18n.t('validation.required')
     }
   }
 
-  if (changes.email) {
-    if (!model.email) {
-      ++validator.count
+  if (!model.email) {
+    ++validator.count
+    if (changes.email) {
       validator.errors.email = i18n.t('validation.required')
-    } else if (!EmailValidator.validate(model.email)) {
-      ++validator.count
+    }
+  } else if (!EmailValidator.validate(model.email)) {
+    ++validator.count
+    if (changes.email) {
       validator.errors.email = i18n.t('validation.invalid_email')
     }
   }
 
-  if (changes.phoneLandline) {
-    if (!model.phoneLandline) {
-      ++validator.count
+  if (!model.phoneLandline) {
+    ++validator.count
+    if (changes.phoneLandline) {
       validator.errors.phoneLandline = i18n.t('validation.required')
     }
   }
 
-  if (changes.phoneMobile) {
-    if (!model.phoneMobile) {
-      ++validator.count
+  if (!model.phoneMobile) {
+    ++validator.count
+    if (changes.phoneMobile) {
       validator.errors.phoneMobile = i18n.t('validation.required')
     }
   }
@@ -58,20 +52,25 @@ export default (model, changes) => {
 
     if (!model.address.country) {
       ++validator.count
-      validator.errors.country = i18n.t('validation.required')
+      if (changes.address) {
+        validator.errors.country = i18n.t('validation.required')
+      }
     }
 
     if (!model.address.city) {
       ++validator.count
-      validator.errors.city = i18n.t('validation.required')
+      if (changes.address) {
+        validator.errors.city = i18n.t('validation.required')
+      }
     }
 
     if (!model.address.address) {
       ++validator.count
-      validator.errors.address = i18n.t('validation.required')
+      if (changes.address) {
+        validator.errors.address = i18n.t('validation.required')
+      }
     }
   }
-
 
   return validator
 }
