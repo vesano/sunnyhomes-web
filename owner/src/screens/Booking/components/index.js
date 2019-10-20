@@ -5,7 +5,7 @@ import FetchAction from '../actions/Fetch';
 import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import * as Pages from '../../../router/Pages';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {createStructuredSelector} from "reselect";
 
 class Booking extends React.Component {
@@ -130,4 +130,6 @@ const selectors = createStructuredSelector({
   Booking: store => store.Booking,
 })
 
-export default connect(selectors)(Booking)
+export default withRouter(
+  connect(selectors)(Booking)
+)
