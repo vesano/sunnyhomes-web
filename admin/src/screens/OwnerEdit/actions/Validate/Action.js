@@ -113,6 +113,16 @@ export default (model, changes) => {
     }
   }
 
+  if (!model.id) {
+    if (!model.password1) {
+      ++validator.count
+    }
+
+    if (!model.password2) {
+      ++validator.count
+    }
+  }
+
   if (model.password1 && model.password2) {
 
     if (!passwordSchema.validate(model.password1)) {

@@ -25,8 +25,6 @@ class Profile extends React.Component {
     }
   })
 
-  changeBool = name => e => this.change(name, e.target.checked)
-
   changeString = name => e => this.change(name, e.target.value)
 
   getError = key => {

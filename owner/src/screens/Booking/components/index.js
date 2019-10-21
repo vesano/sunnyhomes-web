@@ -72,18 +72,18 @@ class Booking extends React.Component {
                     <i className="fa fa-ban"/>&nbsp;{i18n.t('booking.cancel_action')}
                   </Link>
 
-                  {model.id > 0 && <button className="btn btn-danger transition-3d-hover mr-1"
-                                           type="button"
-                                           onClick={this.remove}
-                                           disabled={isLoading || !isValid}>
+                  {model.id && <button className="btn btn-danger transition-3d-hover mr-1"
+                                       type="button"
+                                       onClick={this.remove}
+                                       disabled={isLoading}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
                     &nbsp;{i18n.t('booking.remove_action')}
                   </button>}
 
                   {!model.id && <button className="btn btn-primary transition-3d-hover"
-                          type="button"
-                          onClick={this.submit}
-                          disabled={isLoading || !isValid}>
+                                        type="button"
+                                        onClick={this.submit}
+                                        disabled={isLoading || !isValid}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
                     &nbsp;{i18n.t('booking.create_action')}
                   </button>}

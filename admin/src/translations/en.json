@@ -1,3 +1,87 @@
 {
-
+  "navigation": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "admins": "Admins",
+    "owners": "Owners",
+    "profile": "Profile"
+  },
+  "owners": {
+    "title": "Owners",
+    "new_action": "Add"
+  },
+  "owner_edit": {
+    "title": "New owner",
+    "save_action": "Save",
+    "remove_action": "Remove",
+    "cancel_action": "Cancel",
+    "name": "First name",
+    "surname": "Last name",
+    "email": "Email",
+    "phoneMobile": "Mobile phone",
+    "phoneLandline": "Landline phone",
+    "address": {
+      "address": "Address",
+      "zip": "Zip-code",
+      "city": "City",
+      "country": "Country"
+    },
+    "property": {
+      "propertyId": "Property Id (Smoobu)",
+      "channelId": "Channel ID (Smoobu)",
+      "name": "Property name"
+    },
+    "property_title": "Property",
+    "security_title": "Security",
+    "password1": "New password",
+    "password2": "Repeat new password"
+  },
+  "admins": {
+    "title": "Admins",
+    "new_action": "Add"
+  },
+  "admin_edit": {
+    "title": "New admin",
+    "save_action": "Save",
+    "remove_action": "Remove",
+    "cancel_action": "Cancel",
+    "name": "First name",
+    "surname": "Last name",
+    "email": "Email",
+    "security_title": "Security",
+    "password1": "New password",
+    "password2": "Repeat new password"
+  },
+  "profile": {
+    "action": "Save",
+    "name": "First name",
+    "surname": "Last name",
+    "email": "Email",
+    "title": "My profile"
+  },
+  "placeholder": {
+    "date": "Choose date"
+  },
+  "validation": {
+    "required": "Value is required",
+    "invalid_email": "Email is invalid",
+    "password_mismatch": "Passwords do not match",
+    "weak_password1": "Password is too weak"
+  },
+  "footer": {
+    "copyright": "Copyright"
+  },
+  "notification": {
+    "remove_success": "Removed!",
+    "save_success": "Saved!"
+  },
+  "login": {
+    "title": "Welcome, admin",
+    "login": "Email",
+    "placeholder": "Enter email",
+    "password": "Password",
+    "action": "Sign in",
+    "subtitle": "Sign in to proceed"
+  }
 }

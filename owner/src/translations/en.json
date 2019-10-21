@@ -47,6 +47,10 @@
   "footer": {
     "copyright": "Copyright"
   },
+  "notification": {
+    "remove_success": "Removed!",
+    "save_success": "Saved!"
+  },
   "login": {
     "title": "Welcome, owner",
     "login": "Email",

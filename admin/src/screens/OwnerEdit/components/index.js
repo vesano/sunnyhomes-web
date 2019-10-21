@@ -8,6 +8,7 @@ import Save from '../actions/Save';
 import i18n from '../../../i18n';
 import {createStructuredSelector} from "reselect";
 import PhoneInput from "../../../components/PhoneInput";
+import Remove from "../actions/Remove";
 
 class OwnerEdit extends React.Component {
 
@@ -22,6 +23,12 @@ class OwnerEdit extends React.Component {
         payload: {}
       })
     }
+  }
+
+  remove = () => {
+    const {model} = this.props.OwnerEdit
+
+    this.props.dispatch(Remove(model.id))
   }
 
   submit = () => {
@@ -95,6 +102,14 @@ class OwnerEdit extends React.Component {
                 <Link to={Pages.OWNERS} className="btn btn-sm btn-outline-primary transition-3d-hover mr-1">
                   <i className="fa fa-ban"/>&nbsp;{i18n.t('owner_edit.cancel_action')}
                 </Link>
+
+                {model.id && <button className="btn btn-sm btn-danger transition-3d-hover mr-1"
+                                         type="button"
+                                         onClick={this.remove}
+                                         disabled={isLoading}>
+                  <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
+                  &nbsp;{i18n.t('owner_edit.remove_action')}
+                </button>}
 
                 <button className="btn btn-sm btn-primary transition-3d-hover"
                         type="button"
