@@ -1,4 +1,5 @@
 import i18n from '../../../../i18n'
+import moment from 'moment'
 
 export default (model, changes) => {
   const validator = {
@@ -7,24 +8,29 @@ export default (model, changes) => {
     errors: {}
   }
 
-  if (!model.arrival) {
+  if (!model.arrivalDate) {
     ++validator.count
-    if (changes.arrival) {
-      validator.errors.arrival = i18n.t('validation.required')
+    if (changes.arrivalDate) {
+      validator.errors.arrivalDate = i18n.t('validation.required')
     }
   }
 
-  if (!model.departure) {
+  if (!model.departureDate) {
     ++validator.count
-    if (changes.departure) {
-      validator.errors.departure = i18n.t('validation.required')
+    if (changes.departureDate) {
+      validator.errors.departureDate = i18n.t('validation.required')
     }
   }
 
-  if (!model.type) {
-    ++validator.count
-    if (changes.type) {
-      validator.errors.type = i18n.t('validation.required')
+  if (model.departureDate && model.arrivalDate) {
+    const date1 = moment(model.arrivalDate, 'YYYY-MM-DD')
+    const date2 = moment(model.departureDate, 'YYYY-MM-DD')
+
+    if (!date1.isBefore(date2)) {
+      ++validator.count
+      if (changes.departureDate) {
+        validator.errors.departureDate = i18n.t('validation.booking_date_invalid')
+      }
     }
   }
 

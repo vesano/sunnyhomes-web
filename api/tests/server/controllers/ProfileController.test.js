@@ -30,7 +30,8 @@ describe('ProfileController', () => {
         address: cid(),
       },
       property: {
-        id: cid(),
+        propertyId: cid(),
+        channelId: cid(),
         name: cid(),
       }
     })
@@ -79,7 +80,8 @@ describe('ProfileController', () => {
         address: cid(),
       },
       property: {
-        id: cid(),
+        propertyId: cid(),
+        channelId: cid(),
         name: cid(),
       }
     })

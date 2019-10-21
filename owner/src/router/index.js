@@ -65,7 +65,6 @@ export function createRouter(store) {
 
         <PrivateRoute exact path={Pages.HOME} component={Calendar}/>
 
-        <PrivateRoute exact path={Pages.BOOKING_NEW} component={Booking}/>
         <PrivateRoute path={Pages.BOOKING_EDIT} component={Booking}/>
 
         <Redirect path="*" to={Pages.HOME}/>

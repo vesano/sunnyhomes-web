@@ -1,8 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 import {connect} from 'react-redux';
 import {MODEL_CHANGED} from '../actions';
-import FetchAction from '../actions/Fetch';
+import DatePicker from '../../../components/Date';
 import Save from '../actions/Save';
+import Remove from '../actions/Remove';
 import i18n from '../../../i18n';
 import * as Pages from '../../../router/Pages';
 import {Link, withRouter} from "react-router-dom";
@@ -10,11 +12,10 @@ import {createStructuredSelector} from "reselect";
 
 class Booking extends React.Component {
 
-  componentDidMount() {
-    const {id} = this.props.match.params
+  remove = () => {
+    const {model} = this.props.Booking
 
-    if (id)
-      this.props.dispatch(FetchAction(id))
+    this.props.dispatch(Remove(model.id))
   }
 
   submit = () => {
@@ -30,7 +31,7 @@ class Booking extends React.Component {
     }
   })
 
-  changeString = name => e => this.change(name, e.target.value)
+  changeDate = name => value => this.change(name, value)
 
   getError = key => {
     const {errors} = this.props.Booking.validator
@@ -49,6 +50,13 @@ class Booking extends React.Component {
       serverErrors,
     } = this.props.Booking
 
+    let minDeparture
+    if (model.arrivalDate) {
+      minDeparture = moment(model.arrivalDate, 'YYYY-MM-DD 00:00:00').add(1, 'day').toDate()
+    } else {
+      minDeparture = moment(new Date(), 'YYYY-MM-DD 00:00:00').add(1, 'day').toDate()
+    }
+
     return <div className="container">
       <div className="row">
         <div className="col-12">
@@ -64,13 +72,22 @@ class Booking extends React.Component {
                     <i className="fa fa-ban"/>&nbsp;{i18n.t('booking.cancel_action')}
                   </Link>
 
-                  <button className="btn btn-primary transition-3d-hover"
+                  {model.id > 0 && <button className="btn btn-danger transition-3d-hover mr-1"
+                                           type="button"
+                                           onClick={this.remove}
+                                           disabled={isLoading || !isValid}>
+                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
+                    &nbsp;{i18n.t('booking.remove_action')}
+                  </button>}
+
+                  {!model.id && <button className="btn btn-primary transition-3d-hover"
                           type="button"
                           onClick={this.submit}
-                          disabled={true}>
+                          disabled={isLoading || !isValid}>
                     <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                    &nbsp;{i18n.t('booking.action')}
-                  </button>
+                    &nbsp;{i18n.t('booking.create_action')}
+                  </button>}
+
                 </div>
               </div>
             </div>
@@ -80,39 +97,25 @@ class Booking extends React.Component {
                 <ul className="simple">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
               </div>}
 
-              <div className="mb-4">
-                <div className="row">
-                  <div className="col-12 col-md-4">
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('booking.arrival')}</label>
-                      <input type="text"
-                             className="form-control"
-                             onChange={this.changeString('arrival')}
-                             value={model.arrival || ''}/>
-                      {this.getError('arrival')}
-                    </div>
-                  </div>
-                  <div className="col-12 col-md-4">
+              <div className="row">
+                <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('booking.departure')}</label>
-                      <input type="text"
-                             className="form-control"
-                             onChange={this.changeString('departure')}
-                             value={model.departure || ''}/>
-                      {this.getError('departure')}
-                    </div>
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('booking.arrivalDate')}</label>
+                    <DatePicker
+                      minDate={moment(new Date(), 'YYYY-MM-DD 00:00:00').toDate()}
+                      onChange={this.changeDate('arrivalDate')}
+                      value={model.arrivalDate || ''}/>
+                    {this.getError('arrivalDate')}
                   </div>
-                  <div className="col-12 col-md-4">
 
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('booking.type')}</label>
-                      <input type="text"
-                             className="form-control"
-                             onChange={this.changeString('type')}
-                             value={model.type || ''}/>
-                      {this.getError('type')}
-                    </div>
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('booking.departureDate')}</label>
+                    <DatePicker
+                      minDate={minDeparture}
+                      onChange={this.changeDate('departureDate')}
+                      value={model.departureDate || ''}/>
+                    {this.getError('departureDate')}
                   </div>
                 </div>
 

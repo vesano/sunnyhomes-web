@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const Property = new mongoose.Schema({
-  id: {
+  propertyId: {
+    type: String,
+    required: true
+  },
+  channelId: {
     type: String,
     required: true
   },

@@ -245,18 +245,29 @@ class OwnerEdit extends React.Component {
           <div className="card-body">
 
             <div className="row">
-              <div className="col-12 col-md-6">
+              <div className="col-6 col-md-4">
                 <div className="form-group">
-                  <label className="m-0">{i18n.t('owner_edit.property.id')}</label>
+                  <label className="m-0">{i18n.t('owner_edit.property.propertyId')}</label>
                   <input type="text"
                          className="form-control"
-                         onChange={this.changeProperty('id')}
-                         value={model.property.id || ''}/>
+                         onChange={this.changeProperty('propertyId')}
+                         value={model.property.propertyId || ''}/>
                   {this.getError('propertyId')}
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
+              <div className="col-6 col-md-4">
+                <div className="form-group">
+                  <label className="m-0">{i18n.t('owner_edit.property.channelId')}</label>
+                  <input type="text"
+                         className="form-control"
+                         onChange={this.changeProperty('channelId')}
+                         value={model.property.channelId || ''}/>
+                  {this.getError('channelId')}
+                </div>
+              </div>
+
+              <div className="col-12 col-md-4">
                 <div className="form-group">
                   <label className="m-0">{i18n.t('owner_edit.property.name')}</label>
                   <input type="text"

@@ -204,17 +204,26 @@ class Profile extends React.Component {
               </div>
 
               <div className="row">
-                <div className="col-12 col-md-4">
+                <div className="col-6 col-md-4">
                   <div className="form-group">
-                    <label className="m-0">{i18n.t('profile.property.id')}</label>
+                    <label className="m-0">{i18n.t('profile.property.propertyId')}</label>
                     <input type="text"
                            className="form-control"
                            readOnly={true}
-                           defaultValue={model.property.id}/>
+                           defaultValue={model.property.propertyId}/>
+                  </div>
+                </div>
+                <div className="col-6 col-md-4">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.property.channelId')}</label>
+                    <input type="text"
+                           className="form-control"
+                           readOnly={true}
+                           defaultValue={model.property.channelId}/>
                   </div>
                 </div>
 
-                <div className="col-12 col-md-8">
+                <div className="col-12 col-md-4">
                   <div className="form-group">
                     <label className="m-0">{i18n.t('profile.property.name')}</label>
                     <input type="text"

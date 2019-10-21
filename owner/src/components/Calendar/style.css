@@ -1,3 +1,7 @@
+.calendar-container {
+    height: 750px
+}
+
 .calendar-container .rbc-month-row {
     overflow: initial !important;
 }

@@ -88,7 +88,15 @@ export default (model, changes) => {
 
   if (model.property) {
 
-    if (!model.property.id) {
+    if (!model.property.channelId) {
+      ++validator.count
+
+      if (changes.property) {
+        validator.errors.channelId = i18n.t('validation.required')
+      }
+    }
+
+    if (!model.property.propertyId) {
       ++validator.count
 
       if (changes.property) {

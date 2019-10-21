@@ -1,4 +1,5 @@
 const logger = require('./logger')
+const bcrypt = require('bcryptjs')
 const parameters = require('../parameters')
 const Admin = require('../src/database/model/Admin').Admin
 const Owner = require('../src/database/model/Owner').Owner
@@ -24,20 +25,22 @@ server.listen(parameters.port, async () => {
 
   const admin = new Admin({
     email: 'admin',
-    password: 'admin',
+    password: bcrypt.hashSync('admin', 10),
     name: 'admin',
     surname: 'admin',
   })
 
   try {
-    await admin.save()
+    await Admin.findOneAndUpdate({email: admin.email}, admin, {
+      upsert: true, new: true, runValidators: true
+    })
   } catch (ignore) {
 
   }
 
-  const owner = new Owner({
+  const owner = {
     email: 'owner',
-    password: 'owner',
+    password: bcrypt.hashSync('owner', 10),
     name: 'owner',
     surname: 'owner',
 
@@ -52,13 +55,16 @@ server.listen(parameters.port, async () => {
     },
 
     property: {
-      id: 215077,
-      name: 'Owner property'
+      propertyId: 220294,
+      channelId: 243933,
+      name: '#1 Test property'
     }
-  })
+  }
 
   try {
-    await owner.save()
+    await Owner.findOneAndUpdate({email: owner.email}, owner, {
+      upsert: true, new: true, runValidators: true
+    })
   } catch (ignore) {
 
   }

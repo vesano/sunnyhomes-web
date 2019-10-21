@@ -4,9 +4,9 @@ import Calendar from '../../../components/Calendar';
 import i18n from '../../../i18n';
 import FetchAction from '../actions/Fetch';
 import * as Pages from '../../../router/Pages';
-import {Link} from "react-router-dom";
 import {createStructuredSelector} from "reselect";
 import {replace} from 'connected-react-router'
+import {SET_BOOKING} from "../../Booking/actions";
 
 class MyCalendar extends React.Component {
 
@@ -14,18 +14,32 @@ class MyCalendar extends React.Component {
     this.props.dispatch(FetchAction())
   }
 
-  onSelectEvent = (e) => {
+  onSelectEvent = e => {
 
-    console.log(e);
+    const model = {
+      id: e.resource.id,
+      arrivalDate: e.resource.arrival,
+      departureDate: e.resource.departure,
+    }
+
+    this.openBooking(model)()
+  }
+
+  openBooking = payload => () => {
+
+    this.props.dispatch({
+      type: SET_BOOKING,
+      payload
+    })
 
     this.props.dispatch(
-      replace(Pages.BOOKING_EDIT.replace(':id', e.resource.id))
+      replace(Pages.BOOKING_EDIT)
     )
   }
 
   render() {
 
-    const {isLoading, events} = this.props.Calendar
+    const {events} = this.props.Calendar
 
     return <div className="container-fluid">
       <div className="row">
@@ -37,9 +51,10 @@ class MyCalendar extends React.Component {
                   <h3 className="m-0">{i18n.t('calendar.title')}</h3>
                 </div>
                 <div className="col-12 col-md-auto text-right">
-                  <Link className="btn btn-primary" to={Pages.BOOKING_NEW}>
+                  <button className="btn btn-primary"
+                          onClick={this.openBooking({})}>
                     <i className="fa fa-plus"/>&nbsp;{i18n.t('calendar.action')}
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

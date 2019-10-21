@@ -20,38 +20,26 @@ export default (model) => (dispatch, getState) => {
     type: SAVE_BEFORE
   })
 
-  let promise
-  if (model.id) {
-    promise = request.put(parameters.apiHost + `/api/v1/booking/${model.id}`, data, {
-      headers: {
-        Authorization: token
-      }
-    })
-  } else {
-    promise = request.post(parameters.apiHost + `/api/v1/booking`, data, {
-      headers: {
-        Authorization: token
-      }
-    })
-  }
-
-  promise.then(({data}) => {
+  request.post(parameters.apiHost + `/api/v1/booking`, data, {
+    headers: {
+      Authorization: token
+    }
+  }).then(({data}) => {
     dispatch({
       type: SAVE_SUCCESS,
       payload: data
     })
-  })
-    .catch(e => {
-      console.log(e);
+  }).catch(e => {
+    console.log(e);
 
-      if (!e.response) return
+    if (!e.response) return
 
-      dispatch({
-        type: SAVE_FAILURE,
-        payload: {
-          status: e.response.status,
-          data: e.response.data
-        }
-      })
+    dispatch({
+      type: SAVE_FAILURE,
+      payload: {
+        status: e.response.status,
+        data: e.response.data
+      }
     })
+  })
 }

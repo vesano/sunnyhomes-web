@@ -12,7 +12,9 @@ const MyCalendar = props => (
     <Calendar
       localizer={localizer}
       step={60}
-      showMultiDayTimes
+      culture='en-GB'
+      startAccessor="start"
+      endAccessor="end"
       {...props}/>
   </div>
 )

@@ -1,3 +1,58 @@
 {
-
+  "navigation": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "calendar": "Calendar",
+    "profile": "Profile"
+  },
+  "calendar": {
+    "action": "Add",
+    "title": "Reservations"
+  },
+  "profile": {
+    "action": "Save",
+    "name": "First name",
+    "surname": "Last name",
+    "email": "Email",
+    "phoneMobile": "Mobile phone",
+    "phoneLandline": "Landline phone",
+    "address": {
+      "address": "Address",
+      "zip": "Zip-code",
+      "city": "City",
+      "country": "Country"
+    },
+    "property": {
+      "propertyId": "Property Id (Smoobu)",
+      "channelId": "Channel ID (Smoobu)",
+      "name": "Property name"
+    },
+    "title": "My profile"
+  },
+  "booking": {
+    "cancel_action": "Cancel",
+    "remove_action": "Remove",
+    "create_action": "Save",
+    "arrivalDate": "Arrival date",
+    "departureDate": "Departure date",
+    "title": "Your reservation"
+  },
+  "placeholder": {
+    "date": "Choose date"
+  },
+  "validation": {
+    "required": "Value is required"
+  },
+  "footer": {
+    "copyright": "Copyright"
+  },
+  "login": {
+    "title": "Welcome, owner",
+    "login": "Email",
+    "placeholder": "Enter email",
+    "password": "Password",
+    "action": "Sign in",
+    "subtitle": "Sign in to proceed"
+  }
 }

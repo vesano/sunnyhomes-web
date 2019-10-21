@@ -3,10 +3,10 @@ import * as Action from '../actions'
 
 const id = (prev = null, action) => {
   switch (action.type) {
-    case Action.FETCH_SUCCESS:
+    case Action.SET_BOOKING:
     case Action.SAVE_SUCCESS:
-      if (action.payload._id !== undefined) {
-        return action.payload._id
+      if (action.payload.id !== undefined) {
+        return action.payload.id
       }
       return null
     default:
@@ -14,17 +14,17 @@ const id = (prev = null, action) => {
   }
 }
 
-const arrival = (prev = null, action) => {
+const arrivalDate = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
-    case Action.FETCH_SUCCESS:
-      if (action.payload.arrival !== undefined) {
-        return action.payload.arrival
+    case Action.SET_BOOKING:
+      if (action.payload.arrivalDate !== undefined) {
+        return action.payload.arrivalDate
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload.arrival !== undefined) {
-        return action.payload.arrival
+      if (action.payload.arrivalDate !== undefined) {
+        return action.payload.arrivalDate
       }
       return prev
     default:
@@ -32,35 +32,17 @@ const arrival = (prev = null, action) => {
   }
 }
 
-const departure = (prev = null, action) => {
+const departureDate = (prev = null, action) => {
   switch (action.type) {
     case Action.SAVE_SUCCESS:
-    case Action.FETCH_SUCCESS:
-      if (action.payload.departure !== undefined) {
-        return action.payload.departure
+    case Action.SET_BOOKING:
+      if (action.payload.departureDate !== undefined) {
+        return action.payload.departureDate
       }
       return null
     case Action.MODEL_CHANGED:
-      if (action.payload.departure !== undefined) {
-        return action.payload.departure
-      }
-      return prev
-    default:
-      return prev
-  }
-}
-
-const type = (prev = 'reservation', action) => {
-  switch (action.type) {
-    case Action.SAVE_SUCCESS:
-    case Action.FETCH_SUCCESS:
-      if (action.payload.type !== undefined) {
-        return action.payload.type
-      }
-      return null
-    case Action.MODEL_CHANGED:
-      if (action.payload.type !== undefined) {
-        return action.payload.type
+      if (action.payload.departureDate !== undefined) {
+        return action.payload.departureDate
       }
       return prev
     default:
@@ -70,7 +52,6 @@ const type = (prev = 'reservation', action) => {
 
 export default combineReducers({
   id,
-  arrival,
-  departure,
-  type,
+  arrivalDate,
+  departureDate,
 })

@@ -10,7 +10,7 @@ router.get('/booking', isOwner, async (req, res) => {
 
   try {
 
-    const apartmentId = req.user.user.property.id
+    const apartmentId = req.user.user.property.propertyId
 
     axios.get(`https://login.smoobu.com/api/apartment/${apartmentId}/booking`, {
       headers: {
@@ -23,9 +23,42 @@ router.get('/booking', isOwner, async (req, res) => {
 
     }).catch(e => {
 
-      logger.error(e)
+      logger.error(e.response)
 
-      res.status(500).json(e)
+      res.status(e.response.status).json(e.response.data)
+
+    })
+
+
+  } catch (e) {
+
+    logger.error(e);
+
+    res.status(e.code > 400 ? e.code : 500).json(e)
+  }
+})
+
+router.delete('/booking/:id', isOwner, async (req, res) => {
+
+  try {
+
+    const apartmentId = req.user.user.property.propertyId
+    const bookingId = req.params.id
+
+    axios.delete(`https://login.smoobu.com/api/apartment/${apartmentId}/booking/${bookingId}`, {
+      headers: {
+        "Api-Key": parameters.smoobu.apiKey,
+        "Cache-Control": 'no-cache'
+      }
+    }).then(() => {
+
+      res.status(204).send()
+
+    }).catch(e => {
+
+      logger.error(e.response)
+
+      res.status(e.response.status).json(e.response.data)
 
     })
 
@@ -42,21 +75,42 @@ router.post('/booking', isOwner, async (req, res) => {
 
   try {
 
-    const apartmentId = req.user.property.id
+    const owner = req.user.user;
 
-    axios.post(`https://login.smoobu.com/api/apartment/${apartmentId}/booking`, req.body, {
+    const apartmentId = owner.property.propertyId
+    const channelId = owner.property.channelId
+
+    const data = {
+      channelId,
+      arrivalDate: req.body.arrivalDate,
+      departureDate: req.body.departureDate,
+      email: owner.email,
+      phone: owner.phoneMobile || owner.phoneLandline,
+      firstName: owner.name,
+      lastName: owner.surname,
+      address: {
+        location: owner.address.address,
+        postalCode: owner.address.zip,
+      },
+      country: owner.address.country,
+      notice: '[Sunnyhomes] Reservation by owner'
+    }
+
+    axios.post(`https://login.smoobu.com/api/apartment/${apartmentId}/booking`, data, {
       headers: {
-        "Api-Key": parameters.smoobu.apiKey
+        "Api-Key": parameters.smoobu.apiKey,
+        "Content-Type": 'application/json',
+        "Cache-Control": 'no-cache'
       }
     }).then(({data}) => {
 
-      res.send(200).json(data)
+      res.status(201).json(data)
 
     }).catch(e => {
 
-      logger.error(e)
+      logger.error(e.response)
 
-      res.send(500).json(e)
+      res.status(e.response.status).json(e.response.data)
 
     })
 
