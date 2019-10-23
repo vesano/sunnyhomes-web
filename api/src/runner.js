@@ -56,7 +56,6 @@ server.listen(parameters.port, async () => {
 
     property: {
       propertyId: 220294,
-      channelId: 243933,
       name: '#1 Test property'
     }
   }

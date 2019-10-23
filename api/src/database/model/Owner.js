@@ -4,22 +4,18 @@ const bcrypt = require('bcryptjs');
 const Property = new mongoose.Schema({
   propertyId: {
     type: String,
-    required: true
-  },
-  channelId: {
-    type: String,
-    required: true
+    required: false
   },
   name: {
     type: String,
-    required: true
+    required: false
   },
 })
 
 const Address = new mongoose.Schema({
   address: {
     type: String,
-    required: true
+    required: false
   },
   zip: {
     type: String,
@@ -27,23 +23,15 @@ const Address = new mongoose.Schema({
   },
   city: {
     type: String,
-    required: true
+    required: false
   },
   country: {
     type: String,
-    required: true
+    required: false
   },
 })
 
 const schema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  surname: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     lowercase: true,
@@ -54,21 +42,29 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  name: {
+    type: String,
+    required: false
+  },
+  surname: {
+    type: String,
+    required: false
+  },
   address: {
     type: Address,
-    required: true
+    required: false
   },
   phoneLandline: {
     type: String,
-    required: true
+    required: false
   },
   phoneMobile: {
     type: String,
-    required: true
+    required: false
   },
   property: {
     type: Property,
-    required: true
+    required: false
   },
   createdAt: {
     type: Date,

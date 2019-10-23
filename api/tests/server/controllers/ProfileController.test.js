@@ -31,7 +31,6 @@ describe('ProfileController', () => {
       },
       property: {
         propertyId: cid(),
-        channelId: cid(),
         name: cid(),
       }
     })
@@ -81,7 +80,6 @@ describe('ProfileController', () => {
       },
       property: {
         propertyId: cid(),
-        channelId: cid(),
         name: cid(),
       }
     })

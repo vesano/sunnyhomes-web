@@ -92,9 +92,7 @@ describe('OwnerRESTController', () => {
             address: cid(),
           },
           property: {
-
             propertyId: cid(),
-            channelId: cid(),
             name: cid(),
           }
         }
@@ -142,9 +140,7 @@ describe('OwnerRESTController', () => {
         address: cid(),
       },
       property: {
-
         propertyId: cid(),
-        channelId: cid(),
         name: cid(),
       }
     })
@@ -206,9 +202,7 @@ describe('OwnerRESTController', () => {
         address: cid(),
       },
       property: {
-
         propertyId: cid(),
-        channelId: cid(),
         name: cid(),
       }
     })
@@ -267,7 +261,6 @@ describe('OwnerRESTController', () => {
       },
       property: {
         propertyId: cid(),
-        channelId: cid(),
         name: cid(),
       }
     })
@@ -312,9 +305,7 @@ describe('OwnerRESTController', () => {
         address: cid(),
       },
       property: {
-
         propertyId: cid(),
-        channelId: cid(),
         name: cid(),
       }
     })

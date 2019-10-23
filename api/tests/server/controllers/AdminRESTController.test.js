@@ -92,7 +92,6 @@ describe('AdminRESTController', () => {
           },
           property: {
             propertyId: cid(),
-            channelId: cid(),
             name: cid(),
           }
         }

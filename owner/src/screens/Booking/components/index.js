@@ -105,7 +105,9 @@ class Booking extends React.Component {
                     <DatePicker
                       minDate={moment(new Date(), 'YYYY-MM-DD 00:00:00').toDate()}
                       onChange={this.changeDate('arrivalDate')}
-                      value={model.arrivalDate || ''}/>
+                      value={model.arrivalDate
+                        ? moment(model.arrivalDate, 'YYYY-MM-DD').format('DD-MM-YYYY')
+                        : ''}/>
                     {this.getError('arrivalDate')}
                   </div>
 
@@ -114,7 +116,9 @@ class Booking extends React.Component {
                     <DatePicker
                       minDate={minDeparture}
                       onChange={this.changeDate('departureDate')}
-                      value={model.departureDate || ''}/>
+                      value={model.departureDate
+                        ? moment(model.departureDate, 'YYYY-MM-DD').format('DD-MM-YYYY')
+                        : ''}/>
                     {this.getError('departureDate')}
                   </div>
                 </div>

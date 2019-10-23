@@ -107,9 +107,23 @@ class AdminEdit extends React.Component {
             </div>}
 
             <div className="row">
+              <div className="col-12">
+                <div className="form-group">
+                  <label className="m-0 required">{i18n.t('admin_edit.email')}</label>
+                  <input type="email"
+                         name="email"
+                         className="form-control"
+                         onChange={this.changeString('email')}
+                         value={model.email || ''}/>
+                  {this.getError('email')}
+                </div>
+              </div>
+            </div>
+
+            <div className="row">
               <div className="col-12 col-md-6">
                 <div className="form-group">
-                  <label className="m-0">{i18n.t('admin_edit.name')}</label>
+                  <label className="m-0 required">{i18n.t('admin_edit.name')}</label>
                   <input type="text"
                          name="name"
                          className="form-control"
@@ -121,27 +135,13 @@ class AdminEdit extends React.Component {
 
               <div className="col-12 col-md-6">
                 <div className="form-group">
-                  <label className="m-0">{i18n.t('admin_edit.surname')}</label>
+                  <label className="m-0 required">{i18n.t('admin_edit.surname')}</label>
                   <input type="text"
                          name="surname"
                          className="form-control"
                          onChange={this.changeString('surname')}
                          value={model.surname || ''}/>
                   {this.getError('surname')}
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-12">
-                <div className="form-group">
-                  <label className="m-0">{i18n.t('admin_edit.email')}</label>
-                  <input type="email"
-                         name="email"
-                         className="form-control"
-                         onChange={this.changeString('email')}
-                         value={model.email || ''}/>
-                  {this.getError('email')}
                 </div>
               </div>
             </div>
@@ -164,7 +164,7 @@ class AdminEdit extends React.Component {
             <div className="row">
               <div className="col-12 col-md-6">
                 <div className="form-group">
-                  <label className="m-0">{i18n.t('admin_edit.password1')}</label>
+                  <label className="m-0 required">{i18n.t('admin_edit.password1')}</label>
                   <input type="password"
                          className="form-control"
                          onChange={this.changeString('password1')}
@@ -174,7 +174,7 @@ class AdminEdit extends React.Component {
               </div>
               <div className="col-12 col-md-6">
                 <div className="form-group">
-                  <label className="m-0">{i18n.t('admin_edit.password2')}</label>
+                  <label className="m-0 required">{i18n.t('admin_edit.password2')}</label>
                   <input type="password"
                          className="form-control"
                          onChange={this.changeString('password2')}

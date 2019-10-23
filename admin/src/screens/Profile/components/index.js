@@ -71,7 +71,17 @@ class Profile extends React.Component {
               </div>}
 
               <div className="form-group">
-                <label className="m-0">{i18n.t('profile.name')}</label>
+                <label className="m-0 required">{i18n.t('profile.email')}</label>
+                <input type="email"
+                       name="email"
+                       className="form-control"
+                       onChange={this.changeString('email')}
+                       value={model.email || ''}/>
+                {this.getError('email')}
+              </div>
+
+              <div className="form-group">
+                <label className="m-0 required">{i18n.t('profile.name')}</label>
                 <input type="text"
                        name="name"
                        className="form-control"
@@ -81,23 +91,13 @@ class Profile extends React.Component {
               </div>
 
               <div className="form-group">
-                <label className="m-0">{i18n.t('profile.surname')}</label>
+                <label className="m-0 required">{i18n.t('profile.surname')}</label>
                 <input type="text"
                        name="surname"
                        className="form-control"
                        onChange={this.changeString('surname')}
                        value={model.surname || ''}/>
                 {this.getError('surname')}
-              </div>
-
-              <div className="form-group">
-                <label className="m-0">{i18n.t('profile.email')}</label>
-                <input type="email"
-                       name="email"
-                       className="form-control"
-                       onChange={this.changeString('email')}
-                       value={model.email || ''}/>
-                {this.getError('email')}
               </div>
 
             </div>

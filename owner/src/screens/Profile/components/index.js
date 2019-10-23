@@ -85,6 +85,21 @@ class Profile extends React.Component {
               </div>}
 
               <div className="mb-4">
+
+                <div className="row">
+                  <div className="col-12">
+                    <div className="form-group">
+                      <label className="m-0 required">{i18n.t('profile.email')}</label>
+                      <input type="email"
+                             name="email"
+                             className="form-control"
+                             onChange={this.changeString('email')}
+                             value={model.email || ''}/>
+                      {this.getError('email')}
+                    </div>
+                  </div>
+                </div>
+
                 <div className="row">
                   <div className="col-12 col-md-6">
                     <div className="form-group">
@@ -97,8 +112,8 @@ class Profile extends React.Component {
                       {this.getError('name')}
                     </div>
                   </div>
-                  <div className="col-12 col-md-6">
 
+                  <div className="col-12 col-md-6">
                     <div className="form-group">
                       <label className="m-0">{i18n.t('profile.surname')}</label>
                       <input type="text"
@@ -107,20 +122,6 @@ class Profile extends React.Component {
                              onChange={this.changeString('surname')}
                              value={model.surname || ''}/>
                       {this.getError('surname')}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-12">
-                    <div className="form-group">
-                      <label className="m-0">{i18n.t('profile.email')}</label>
-                      <input type="email"
-                             name="email"
-                             className="form-control"
-                             onChange={this.changeString('email')}
-                             value={model.email || ''}/>
-                      {this.getError('email')}
                     </div>
                   </div>
                 </div>
@@ -203,35 +204,28 @@ class Profile extends React.Component {
                 </div>
               </div>
 
-              <div className="row">
-                <div className="col-6 col-md-4">
-                  <div className="form-group">
-                    <label className="m-0">{i18n.t('profile.property.propertyId')}</label>
-                    <input type="text"
-                           className="form-control"
-                           readOnly={true}
-                           defaultValue={model.property.propertyId}/>
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="form-group">
-                    <label className="m-0">{i18n.t('profile.property.channelId')}</label>
-                    <input type="text"
-                           className="form-control"
-                           readOnly={true}
-                           defaultValue={model.property.channelId}/>
-                  </div>
-                </div>
 
-                <div className="col-12 col-md-4">
-                  <div className="form-group">
-                    <label className="m-0">{i18n.t('profile.property.name')}</label>
-                    <input type="text"
-                           className="form-control"
-                           readOnly={true}
-                           defaultValue={model.property.name}/>
-                  </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12">
+          <div className="card shadow-sm mb-3">
+            <div className="card-header">
+              <div className="row">
+                <div className="col">
+                  <h3 className="m-0">{i18n.t('profile.property_title')}</h3>
                 </div>
+              </div>
+            </div>
+            <div className="card-body">
+
+              <div className="form-group">
+                <label className="m-0">{i18n.t('profile.property.name')}</label>
+                <input type="text"
+                       className="form-control"
+                       readOnly={true}
+                       defaultValue={model.property.name}/>
               </div>
 
             </div>

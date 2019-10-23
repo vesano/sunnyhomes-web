@@ -4,6 +4,7 @@ import promise from 'redux-promise-middleware'
 import thunk from 'redux-thunk'
 import {routerMiddleware} from 'connected-react-router'
 import {createBrowserHistory} from 'history'
+import Cookie from 'js-cookie'
 
 import sagas from './sagas'
 import reducers from './reducers'
@@ -17,7 +18,7 @@ let middleware = [promise, thunk, sagaMiddleware, routerMiddleware(history)]
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-let token = localStorage.getItem('token')
+let token = Cookie.get('token')
 if (!token) {
   token = null
 }

@@ -1,18 +1,19 @@
 import {all, takeLatest, put} from 'redux-saga/effects'
 import {replace} from 'connected-react-router'
+import Cookie from 'js-cookie'
 import * as Actions from '../actions'
 import * as Pages from '../../../router/Pages'
 
 function* saveToken({payload}) {
 
-    localStorage.setItem('token', payload.token)
+    Cookie.set('token', payload.token)
 
     yield put(replace(Pages.PROFILE))
 }
 
 function* removeToken() {
 
-    localStorage.removeItem('token')
+    Cookie.remove('token')
 
     yield put(replace(Pages.LOGIN))
 }

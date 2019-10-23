@@ -83,6 +83,7 @@ class MyCalendar extends React.Component {
             <div className="card-body">
 
               <Calendar
+                views={['month']}
                 events={events}
                 selectable={true}
                 onSelectSlot={this.createEvent}

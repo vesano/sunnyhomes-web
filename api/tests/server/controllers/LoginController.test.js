@@ -58,7 +58,6 @@ describe('LoginController', () => {
       },
       property: {
         propertyId: cid(),
-        channelId: cid(),
         name: cid(),
       }
     })

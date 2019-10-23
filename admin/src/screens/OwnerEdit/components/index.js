@@ -85,7 +85,7 @@ class OwnerEdit extends React.Component {
 
     let title = i18n.t('owner_edit.title')
     if (model.id) {
-      title = `${model.surname} ${model.name}`
+      title = `${model.email}`
     }
 
     return <div className="row">
@@ -103,10 +103,11 @@ class OwnerEdit extends React.Component {
                   <i className="fa fa-ban"/>&nbsp;{i18n.t('owner_edit.cancel_action')}
                 </Link>
 
-                {model.id && <button className="btn btn-sm btn-danger transition-3d-hover mr-1"
-                                         type="button"
-                                         onClick={this.remove}
-                                         disabled={isLoading}>
+                {model.id && <button
+                  className="btn btn-sm btn-danger transition-3d-hover mr-1"
+                  type="button"
+                  onClick={this.remove}
+                  disabled={isLoading}>
                   <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
                   &nbsp;{i18n.t('owner_edit.remove_action')}
                 </button>}
@@ -126,6 +127,20 @@ class OwnerEdit extends React.Component {
             {serverErrors.length > 0 && <div className="alert alert-danger">
               <ul className="simple">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
             </div>}
+
+            <div className="row">
+              <div className="col-12">
+                <div className="form-group">
+                  <label className="m-0 required">{i18n.t('owner_edit.email')}</label>
+                  <input type="email"
+                         name="email"
+                         className="form-control"
+                         onChange={this.changeString('email')}
+                         value={model.email || ''}/>
+                  {this.getError('email')}
+                </div>
+              </div>
+            </div>
 
             <div className="row">
               <div className="col-12 col-md-6">
@@ -149,20 +164,6 @@ class OwnerEdit extends React.Component {
                          onChange={this.changeString('surname')}
                          value={model.surname || ''}/>
                   {this.getError('surname')}
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-12">
-                <div className="form-group">
-                  <label className="m-0">{i18n.t('owner_edit.email')}</label>
-                  <input type="email"
-                         name="email"
-                         className="form-control"
-                         onChange={this.changeString('email')}
-                         value={model.email || ''}/>
-                  {this.getError('email')}
                 </div>
               </div>
             </div>
@@ -260,7 +261,7 @@ class OwnerEdit extends React.Component {
           <div className="card-body">
 
             <div className="row">
-              <div className="col-6 col-md-4">
+              <div className="col-12 col-md-6">
                 <div className="form-group">
                   <label className="m-0">{i18n.t('owner_edit.property.propertyId')}</label>
                   <input type="text"
@@ -271,18 +272,7 @@ class OwnerEdit extends React.Component {
                 </div>
               </div>
 
-              <div className="col-6 col-md-4">
-                <div className="form-group">
-                  <label className="m-0">{i18n.t('owner_edit.property.channelId')}</label>
-                  <input type="text"
-                         className="form-control"
-                         onChange={this.changeProperty('channelId')}
-                         value={model.property.channelId || ''}/>
-                  {this.getError('channelId')}
-                </div>
-              </div>
-
-              <div className="col-12 col-md-4">
+              <div className="col-12 col-md-6">
                 <div className="form-group">
                   <label className="m-0">{i18n.t('owner_edit.property.name')}</label>
                   <input type="text"
@@ -312,7 +302,7 @@ class OwnerEdit extends React.Component {
             <div className="row">
               <div className="col-12 col-md-6">
                 <div className="form-group">
-                  <label className="m-0">{i18n.t('owner_edit.password1')}</label>
+                  <label className="m-0 required">{i18n.t('owner_edit.password1')}</label>
                   <input type="password"
                          className="form-control"
                          onChange={this.changeString('password1')}
@@ -322,7 +312,7 @@ class OwnerEdit extends React.Component {
               </div>
               <div className="col-12 col-md-6">
                 <div className="form-group">
-                  <label className="m-0">{i18n.t('owner_edit.password2')}</label>
+                  <label className="m-0 required">{i18n.t('owner_edit.password2')}</label>
                   <input type="password"
                          className="form-control"
                          onChange={this.changeString('password2')}

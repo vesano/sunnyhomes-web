@@ -26,7 +26,7 @@ class DateWrapper extends React.Component {
       closeOnSelect={true}
       viewMode="days"
       placeholderText={i18n.t('placeholder.date')}
-      dateFormat={'yyyy-mm-dd'}
+      dateFormat={'dd-mm-yyyy'}
       className="form-control"
       {...this.props}
       onChange={this.onChange}/>

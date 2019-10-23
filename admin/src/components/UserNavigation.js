@@ -18,7 +18,7 @@ class UserNavigation extends PureComponent {
       <div className="container space-top-1 pb-3">
         <div className="row">
           <div className="col-12">
-            <h1 className="h3 text-white font-weight-medium mb-1">{i18n.t('navigation.welcome')}, {user.name}!</h1>
+            <h1 className="h3 text-white font-weight-medium mb-1">{i18n.t('navigation.welcome')}, {user.name || user.email}!</h1>
           </div>
         </div>
       </div>
