@@ -59,6 +59,7 @@ const initialValidator = {
 const validator = (prev = initialValidator, action) => {
   switch (action.type) {
     case Action.FETCH_BEFORE:
+    case Action.FETCH_SUCCESS:
     case Action.VALIDATE_SUCCESS:
       return initialValidator
     case Action.VALIDATE_FAILURE:

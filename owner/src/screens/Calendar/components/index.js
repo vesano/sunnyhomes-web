@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Calendar from '../../../components/Calendar';
+import moment from 'moment';
 import i18n from '../../../i18n';
 import FetchAction from '../actions/Fetch';
 import * as Pages from '../../../router/Pages';
@@ -20,6 +21,27 @@ class MyCalendar extends React.Component {
       id: e.resource.id,
       arrivalDate: e.resource.arrival,
       departureDate: e.resource.departure,
+    }
+
+    this.openBooking(model)()
+  }
+
+  createEvent = e => {
+
+    let start = e.start
+    let end = e.end
+
+    if (start === end) {
+      end = null
+    } else {
+      end = moment(end).format('YYYY-MM-DD')
+    }
+
+    start = moment(start).format('YYYY-MM-DD')
+
+    const model = {
+      arrivalDate: start,
+      departureDate: end,
     }
 
     this.openBooking(model)()
@@ -62,6 +84,8 @@ class MyCalendar extends React.Component {
 
               <Calendar
                 events={events}
+                selectable={true}
+                onSelectSlot={this.createEvent}
                 onSelectEvent={this.onSelectEvent}/>
 
             </div>

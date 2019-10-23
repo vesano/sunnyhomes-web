@@ -4,6 +4,8 @@ import moment from 'moment'
 
 const events = (prev = [], action) => {
   switch (action.type) {
+    case Action.FETCH_FAILURE:
+      return []
     case Action.FETCH_SUCCESS:
       return action.payload.bookings.map(item => {
 

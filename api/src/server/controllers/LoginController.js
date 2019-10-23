@@ -1,8 +1,8 @@
 const express = require('express');
 const Owner = require('../../database/model/Owner').Owner;
 const Admin = require('../../database/model/Admin').Admin;
-const logger = require('../../logger');
 const AuthService = require('../services/AuthService')
+const ErrorHandler = require('../services/ErrorHandler')
 
 const router = new express.Router({mergeParams: true});
 
@@ -46,10 +46,7 @@ router.post('/owner/login', async (req, res) => {
     })
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -93,10 +90,7 @@ router.post('/admin/login', async (req, res) => {
     })
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -126,10 +120,7 @@ router.post('/login-check', async (req, res) => {
     })
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 

@@ -237,6 +237,44 @@ class Profile extends React.Component {
             </div>
           </div>
         </div>
+
+        <div className="col-12">
+          <div className="card shadow-sm mb-3">
+            <div className="card-header">
+              <div className="row">
+                <div className="col">
+                  <h3 className="m-0">{i18n.t('profile.security_title')}</h3>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.password1')}</label>
+                    <input type="password"
+                           className="form-control"
+                           onChange={this.changeString('password1')}
+                           value={model.password1 || ''}/>
+                    {this.getError('password1')}
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0">{i18n.t('profile.password2')}</label>
+                    <input type="password"
+                           className="form-control"
+                           onChange={this.changeString('password2')}
+                           value={model.password2 || ''}/>
+                    {this.getError('password2')}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   }

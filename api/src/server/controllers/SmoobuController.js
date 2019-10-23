@@ -1,7 +1,7 @@
 const axios = require('axios');
 const express = require('express');
-const logger = require('../../logger');
 const isOwner = require('../services/AuthService').isOwner;
+const ErrorHandler = require('../services/ErrorHandler');
 const parameters = require('../../../parameters');
 
 const router = new express.Router({mergeParams: true});
@@ -22,19 +22,12 @@ router.get('/booking', isOwner, async (req, res) => {
       res.status(200).json(data)
 
     }).catch(e => {
-
-      logger.error(e.response)
-
       res.status(e.response.status).json(e.response.data)
-
     })
 
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -55,19 +48,12 @@ router.delete('/booking/:id', isOwner, async (req, res) => {
       res.status(204).send()
 
     }).catch(e => {
-
-      logger.error(e.response)
-
       res.status(e.response.status).json(e.response.data)
-
     })
 
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -107,19 +93,12 @@ router.post('/booking', isOwner, async (req, res) => {
       res.status(201).json(data)
 
     }).catch(e => {
-
-      logger.error(e.response)
-
       res.status(e.response.status).json(e.response.data)
-
     })
 
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 

@@ -28,7 +28,10 @@
       "channelId": "Channel ID (Smoobu)",
       "name": "Property name"
     },
-    "title": "My profile"
+    "title": "My profile",
+    "security_title": "Security",
+    "password1": "New password",
+    "password2": "Repeat new password"
   },
   "booking": {
     "cancel_action": "Cancel",
@@ -42,7 +45,11 @@
     "date": "Choose date"
   },
   "validation": {
-    "required": "Value is required"
+    "required": "Value is required",
+    "booking_date_invalid": "Invalid booking range",
+    "invalid_email": "Email is invalid",
+    "password_mismatch": "Passwords do not match",
+    "weak_password1": "Password is too weak"
   },
   "footer": {
     "copyright": "Copyright"

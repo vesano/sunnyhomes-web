@@ -58,7 +58,10 @@
     "name": "First name",
     "surname": "Last name",
     "email": "Email",
-    "title": "My profile"
+    "title": "My profile",
+    "security_title": "Security",
+    "password1": "New password",
+    "password2": "Repeat new password"
   },
   "placeholder": {
     "date": "Choose date"

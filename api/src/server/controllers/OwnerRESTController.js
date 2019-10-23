@@ -1,8 +1,9 @@
 const express = require('express');
 const Owner = require('../../database/model/Owner').Owner;
-const logger = require('../../logger');
-const checkId = require('../services/RequestParamsValidator').checkId;
+const OwnerService = require('../services/OwnerService');
+const ErrorHandler = require('../services/ErrorHandler');
 const isAdmin = require('../services/AuthService').isAdmin;
+const checkId = require('../services/RequestParamsValidator').checkId;
 
 const router = new express.Router({mergeParams: true});
 
@@ -17,16 +18,10 @@ router.get('/owners', isAdmin, async (req, res) => {
     if (isNaN(page) || page < 0) page = 1
     if (isNaN(limit) || limit < 0) limit = 10
 
-    const skip = limit > 0 && page > 0 ? limit * (page - 1) : 0
-
     let items = []
-    const total = await Owner.countDocuments(filter)
+    const total = await OwnerService.countByFilter(filter)
     if (total > 0) {
-
-      items = await Owner.find(filter, null, {skip, limit})
-        .select('-password')
-        .sort({createdAt: 'desc'})
-        .lean()
+      items = await OwnerService.findByFilter(filter, page, limit)
     }
 
     res.status(200).json({
@@ -38,10 +33,7 @@ router.get('/owners', isAdmin, async (req, res) => {
     })
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -49,20 +41,17 @@ router.get('/owners/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
-    const entity = await Owner.findById(req.params.id).select('-password').lean()
+    const entity = await OwnerService.findOneByFilter({_id: req.params.id})
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
       })
     }
 
-    res.status(200).json(entity)
+    res.status(200).json(OwnerService.serialize(entity))
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -70,15 +59,12 @@ router.delete('/owners/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
-    await Owner.deleteOne({_id: req.params.id})
+    await OwnerService.remove(req.params.id)
 
     res.status(204).send()
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -86,29 +72,12 @@ router.post('/owners', isAdmin, async (req, res) => {
 
   try {
 
-    const entity = new Owner(req.body)
+    const result = await OwnerService.create(req.body)
 
-    const validator = await entity.validate();
-    if (validator) {
-      res.status(400).json({
-        message: 'bad request',
-        errors: validator.errors
-      })
-    }
-
-    await entity.save()
-
-    const content = entity.toObject()
-
-    delete content.password
-
-    res.status(201).json(content)
+    res.status(201).json(OwnerService.serialize(result))
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -123,29 +92,12 @@ router.put('/owners/:id', isAdmin, checkId, async (req, res) => {
       })
     }
 
-    entity.set(req.body)
+    const result = await OwnerService.update(entity, req.body)
 
-    const validator = await entity.validate();
-    if (validator) {
-      res.status(400).json({
-        message: 'bad request',
-        errors: validator.errors
-      })
-    }
-
-    await entity.save()
-
-    const content = entity.toObject()
-
-    delete content.password
-
-    res.status(200).json(content)
+    res.status(200).json(OwnerService.serialize(result))
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 

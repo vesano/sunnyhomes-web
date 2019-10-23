@@ -1,6 +1,7 @@
 const express = require('express');
 const Admin = require('../../database/model/Admin').Admin;
-const logger = require('../../logger');
+const AdminService = require('../services/AdminService');
+const ErrorHandler = require('../services/ErrorHandler');
 const isAdmin = require('../services/AuthService').isAdmin;
 const checkId = require('../services/RequestParamsValidator').checkId;
 
@@ -17,16 +18,10 @@ router.get('/admins', isAdmin, async (req, res) => {
     if (isNaN(page) || page < 0) page = 1
     if (isNaN(limit) || limit < 0) limit = 10
 
-    const skip = limit > 0 && page > 0 ? limit * (page - 1) : 0
-
     let items = []
-    const total = await Admin.countDocuments(filter)
+    const total = await AdminService.countByFilter(filter)
     if (total > 0) {
-
-      items = await Admin.find(filter, null, {skip, limit})
-        .select('-password')
-        .sort({createdAt: 'desc'})
-        .lean()
+      items = await AdminService.findByFilter(filter, page, limit)
     }
 
     res.status(200).json({
@@ -38,10 +33,7 @@ router.get('/admins', isAdmin, async (req, res) => {
     })
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -49,20 +41,17 @@ router.get('/admins/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
-    const entity = await Admin.findById(req.params.id).select('-password').lean()
+    const entity = await AdminService.findOneByFilter({_id: req.params.id})
     if (!entity) {
       res.status(404).json({
         message: 'Not found'
       })
     }
 
-    res.status(200).json(entity)
+    res.status(200).json(AdminService.serialize(entity))
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -70,15 +59,12 @@ router.delete('/admins/:id', isAdmin, checkId, async (req, res) => {
 
   try {
 
-    await Admin.deleteOne({_id: req.params.id})
+    await AdminService.remove(req.params.id)
 
     res.status(204).send()
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -86,29 +72,12 @@ router.post('/admins', isAdmin, async (req, res) => {
 
   try {
 
-    const entity = new Admin(req.body)
+    const result = await AdminService.create(req.body)
 
-    const validator = await entity.validate();
-    if (validator) {
-      res.status(400).json({
-        message: 'bad request',
-        errors: validator.errors
-      })
-    }
-
-    await entity.save()
-
-    const content = entity.toObject()
-
-    delete content.password
-
-    res.status(201).json(content)
+    res.status(201).json(AdminService.serialize(result))
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 
@@ -123,29 +92,12 @@ router.put('/admins/:id', isAdmin, checkId, async (req, res) => {
       })
     }
 
-    entity.set(req.body)
+    const result = await AdminService.update(entity, req.body)
 
-    const validator = await entity.validate();
-    if (validator) {
-      res.status(400).json({
-        message: 'bad request',
-        errors: validator.errors
-      })
-    }
-
-    await entity.save()
-
-    const content = entity.toObject()
-
-    delete content.password
-
-    res.status(200).json(content)
+    res.status(200).json(AdminService.serialize(result))
 
   } catch (e) {
-
-    logger.error(e);
-
-    res.status(e.code > 400 ? e.code : 500).json(e)
+    ErrorHandler.handle(res, e)
   }
 })
 

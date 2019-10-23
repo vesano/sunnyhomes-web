@@ -14,11 +14,8 @@ export const history = createBrowserHistory()
 const sagaMiddleware = createSagaMiddleware()
 
 let middleware = [promise, thunk, sagaMiddleware, routerMiddleware(history)]
-let composeEnhancers = compose
 
-if (process.env.NODE_ENV !== 'production') {
-  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 let token = localStorage.getItem('token')
 if (!token) {
