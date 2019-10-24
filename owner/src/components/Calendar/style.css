@@ -9,3 +9,13 @@
 .calendar-container .rbc-month-row .rbc-date-cell {
     min-height: 100px
 }
+
+.calendar-container .read-only-calendar-event {
+    background-color: #ff525c;
+    color: white
+}
+
+.calendar-container .active-calendar-event {
+    background-color: #58bb4b;
+    color: white
+}

@@ -11,6 +11,7 @@ router.get('/booking', isOwner, async (req, res) => {
   try {
 
     const apartmentId = req.user.user.property.propertyId
+    const channelId = parameters.smoobu.channelId
 
     const axiosConfig = {
       headers: {
@@ -23,7 +24,14 @@ router.get('/booking', isOwner, async (req, res) => {
 
     const onComplete = () => {
       res.status(200).json({
-        bookings,
+        bookings: bookings.map(booking => {
+
+          if (booking.channel && channelId !== booking.channel.id) {
+            delete booking.id
+          }
+
+          return booking
+        }),
         count: bookings.length
       })
     }

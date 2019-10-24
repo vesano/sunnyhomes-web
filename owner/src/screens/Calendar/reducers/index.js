@@ -10,7 +10,6 @@ const events = (prev = [], action) => {
       return action.payload.bookings.map(item => {
 
         return {
-          id: item.id,
           title: item['guest-name'] || item.notice || item.type,
           start: moment(item.arrival, 'YYYY-MM-DD'),
           end: moment(item.departure, 'YYYY-MM-DD').add(1, 'day'), //calendar does not display last day!

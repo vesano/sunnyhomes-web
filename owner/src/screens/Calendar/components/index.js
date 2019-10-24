@@ -17,6 +17,8 @@ class MyCalendar extends React.Component {
 
   onSelectEvent = e => {
 
+    if (!e.resource.id) return
+
     const model = {
       id: e.resource.id,
       arrivalDate: e.resource.arrival,
@@ -87,7 +89,10 @@ class MyCalendar extends React.Component {
                 events={events}
                 selectable={true}
                 onSelectSlot={this.createEvent}
-                onSelectEvent={this.onSelectEvent}/>
+                onSelectEvent={this.onSelectEvent}
+                eventPropGetter={event => ({
+                  className: !event.resource.id ? 'read-only-calendar-event' : 'active-calendar-event'
+                })}/>
 
             </div>
           </div>
