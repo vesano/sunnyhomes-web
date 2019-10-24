@@ -10,7 +10,27 @@ const serverErrors = (prev = [], action) => {
           action.payload.data.message
         ]
       }
+
+      if (action.payload.data.validation_messages !== undefined) {
+
+        if (action.payload.data.validation_messages.error !== undefined) {
+          return [
+            action.payload.data.validation_messages.error
+          ]
+        }
+
+        const fields = Object.values(action.payload.data.validation_messages)
+
+        let errors = []
+        fields.forEach(field => {
+          errors = [...errors, ...Object.values(field)]
+        })
+
+        return errors
+      }
+
       return []
+    case Action.SET_BOOKING:
     case Action.SAVE_SUCCESS:
     case Action.SAVE_BEFORE:
       return []
