@@ -7,13 +7,14 @@ class ErrorBoundary extends React.PureComponent {
     hasError: false
   }
 
+  static getDerivedStateFromError() {
+    // Update state so the next render will show the fallback UI.
+    return {hasError: true};
+  }
+
   componentDidCatch(error, errorInfo) {
     console.log(error);
     console.log(errorInfo);
-
-    this.setState({
-      hasErrors: true
-    });
   }
 
   render() {
