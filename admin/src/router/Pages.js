@@ -1,5 +1,7 @@
 export const LOGIN = '/login';
 
+export const HOME = '/profile';
+
 export const PROFILE = '/profile';
 
 export const OWNERS = '/owners';

@@ -15,41 +15,34 @@ import Owners from '../screens/Owners/components';
 import OwnerEdit from '../screens/OwnerEdit/components';
 import Admins from '../screens/Admins/components';
 import AdminEdit from '../screens/AdminEdit/components';
+import ErrorBoundary from "../components/ErrorBoundary";
 
 export function createRouter(store) {
-
-  const InitialRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) {
-      return <Route {...rest} render={() => (
-        <Loading/>
-      )}/>
-    }
-
-    return <Route {...rest} render={(props) => (
-      <Component {...props}/>
-    )}/>
-  }
 
   const PrivateRoute = ({component: Component, ...rest}) => {
 
     const appState = store.getState().App
 
-    if (appState.isLoadingVisible) {
-      return <Route {...rest} render={() => (
-        <Loading/>
-      )}/>
-    }
+    if (appState.isLoadingVisible) return <Loading/>
 
     if (appState.isAuthenticated === true) {
-      return <Route {...rest} render={(props) => (
-        <Component {...props}/>
-      )}/>
+      return <Route {...rest} render={(props) => <Component {...props}/>}/>
     }
 
     return <Redirect to={Pages.LOGIN}/>
+  }
+
+  const PublicRoute = ({component: Component, ...rest}) => {
+
+    const appState = store.getState().App
+
+    if (appState.isLoadingVisible) return <Loading/>
+
+    if (appState.isAuthenticated === false) {
+      return <Route {...rest} render={(props) => <Component {...props}/>}/>
+    }
+
+    return <Redirect to={Pages.HOME}/>
   }
 
   return <div>
@@ -60,9 +53,10 @@ export function createRouter(store) {
 
       <UserNavigation/>
 
-      <div className="container">
+      <ErrorBoundary>
+
         <Switch>
-          <InitialRoute exact path={Pages.LOGIN} component={Login}/>
+          <PublicRoute exact path={Pages.LOGIN} component={Login}/>
 
           <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
 
@@ -74,10 +68,11 @@ export function createRouter(store) {
           <PrivateRoute exact path={Pages.OWNERS_NEW} component={OwnerEdit}/>
           <PrivateRoute path={Pages.OWNERS_EDIT} component={OwnerEdit}/>
 
-          <Redirect path="*" to={Pages.PROFILE}/>
+          <Redirect path="*" to={Pages.HOME}/>
 
         </Switch>
-      </div>
+      </ErrorBoundary>
+
     </main>
 
     <Footer/>

@@ -13,41 +13,34 @@ import Login from '../screens/Login/components';
 import Profile from '../screens/Profile/components';
 import Calendar from '../screens/Calendar/components';
 import Booking from '../screens/Booking/components';
+import ErrorBoundary from "../components/ErrorBoundary";
 
 export function createRouter(store) {
-
-  const InitialRoute = ({component: Component, ...rest}) => {
-
-    const appState = store.getState().App
-
-    if (appState.isLoadingVisible) {
-      return <Route {...rest} render={() => (
-        <Loading/>
-      )}/>
-    }
-
-    return <Route {...rest} render={(props) => (
-      <Component {...props}/>
-    )}/>
-  }
 
   const PrivateRoute = ({component: Component, ...rest}) => {
 
     const appState = store.getState().App
 
-    if (appState.isLoadingVisible) {
-      return <Route {...rest} render={() => (
-        <Loading/>
-      )}/>
-    }
+    if (appState.isLoadingVisible) return <Loading/>
 
     if (appState.isAuthenticated === true) {
-      return <Route {...rest} render={(props) => (
-        <Component {...props}/>
-      )}/>
+      return <Route {...rest} render={(props) => <Component {...props}/>}/>
     }
 
     return <Redirect to={Pages.LOGIN}/>
+  }
+
+  const PublicRoute = ({component: Component, ...rest}) => {
+
+    const appState = store.getState().App
+
+    if (appState.isLoadingVisible) return <Loading/>
+
+    if (appState.isAuthenticated === false) {
+      return <Route {...rest} render={(props) => <Component {...props}/>}/>
+    }
+
+    return <Redirect to={Pages.HOME}/>
   }
 
   return <div>
@@ -58,18 +51,21 @@ export function createRouter(store) {
 
       <UserNavigation/>
 
-      <Switch>
-        <InitialRoute exact path={Pages.LOGIN} component={Login}/>
+      <ErrorBoundary>
+        <Switch>
 
-        <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
+          <PublicRoute exact path={Pages.LOGIN} component={Login}/>
 
-        <PrivateRoute exact path={Pages.HOME} component={Calendar}/>
+          <PrivateRoute exact path={Pages.HOME} component={Calendar}/>
 
-        <PrivateRoute path={Pages.BOOKING_EDIT} component={Booking}/>
+          <PrivateRoute exact path={Pages.PROFILE} component={Profile}/>
 
-        <Redirect path="*" to={Pages.HOME}/>
+          <PrivateRoute exact path={Pages.BOOKING_EDIT} component={Booking}/>
 
-      </Switch>
+          <Redirect path="*" to={Pages.HOME}/>
+
+        </Switch>
+      </ErrorBoundary>
     </main>
 
     <Footer/>

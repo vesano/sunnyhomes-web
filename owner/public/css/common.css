@@ -1,14 +1,8 @@
-/* Start global styles */
-
 ul.simple {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-
-/* End global styles */
-
-/* Start custom components */
 
 .banner {
     margin: 30px auto;
@@ -201,35 +195,9 @@ body > main.container {
     }
 }
 
-.w-95 {
-    width: 95%
-}
-
-.selected-quote {
-    border: 2px solid #ffc107
-}
-
-.selected-quote .selected-mark {
-    position: absolute;
-    left: -25px;
-    top: -25px;
-    padding: 5px;
-    border-radius: 50%;
-    background: white;
-    border: 2px solid #ffc107;
-    color: #00c9a7
-}
-
-blockquote {
-    -ms-word-break: break-all;
-    word-break: break-all;
-}
-
-blockquote.review {
-    max-height: 200px;
-    overflow: auto;
-}
-
-.root-spinner {
-    /*max-height: 100px;*/
+.error-container {
+    background: #ff9098;
+    color: white;
+    font-weight: bold;
+    text-align: center;
 }

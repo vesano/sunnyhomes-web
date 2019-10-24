@@ -67,121 +67,123 @@ class AdminEdit extends React.Component {
       title = `${model.surname} ${model.name}`
     }
 
-    return <div className="row">
-      <div className="col-12">
+    return <div className="container">
+      <div className="row">
+        <div className="col-12">
 
-        <div className="card shadow-sm my-3">
-          <div className="card-header">
-            <div className="row">
-              <div className="col">
-                <h3 className="m-0">{title}</h3>
-              </div>
-              <div className="col-12 col-lg-auto text-right">
+          <div className="card shadow-sm my-3">
+            <div className="card-header">
+              <div className="row">
+                <div className="col">
+                  <h3 className="m-0">{title}</h3>
+                </div>
+                <div className="col-12 col-lg-auto text-right">
 
-                <Link to={Pages.ADMINS} className="btn btn-sm btn-outline-primary transition-3d-hover mr-1">
-                  <i className="fa fa-ban"/>&nbsp;{i18n.t('admin_edit.cancel_action')}
-                </Link>
+                  <Link to={Pages.ADMINS} className="btn btn-sm btn-outline-primary transition-3d-hover mr-1">
+                    <i className="fa fa-ban"/>&nbsp;{i18n.t('admin_edit.cancel_action')}
+                  </Link>
 
-                {model.id && <button className="btn btn-sm btn-danger transition-3d-hover mr-1"
-                                     type="button"
-                                     onClick={this.remove}
-                                     disabled={isLoading}>
-                  <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
-                  &nbsp;{i18n.t('admin_edit.remove_action')}
-                </button>}
+                  {model.id && <button className="btn btn-sm btn-danger transition-3d-hover mr-1"
+                                       type="button"
+                                       onClick={this.remove}
+                                       disabled={isLoading}>
+                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-times"}/>
+                    &nbsp;{i18n.t('admin_edit.remove_action')}
+                  </button>}
 
-                <button className="btn btn-sm btn-primary transition-3d-hover"
-                        type="button"
-                        onClick={this.submit}
-                        disabled={isLoading || !isValid}>
-                  <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
-                  &nbsp;{i18n.t('admin_edit.save_action')}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="card-body">
-
-            {serverErrors.length > 0 && <div className="alert alert-danger">
-              <ul className="simple">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
-            </div>}
-
-            <div className="row">
-              <div className="col-12">
-                <div className="form-group">
-                  <label className="m-0 required">{i18n.t('admin_edit.email')}</label>
-                  <input type="email"
-                         name="email"
-                         className="form-control"
-                         onChange={this.changeString('email')}
-                         value={model.email || ''}/>
-                  {this.getError('email')}
+                  <button className="btn btn-sm btn-primary transition-3d-hover"
+                          type="button"
+                          onClick={this.submit}
+                          disabled={isLoading || !isValid}>
+                    <i className={isLoading ? "fa fa-spin fa-circle-notch" : "fa fa-check"}/>
+                    &nbsp;{i18n.t('admin_edit.save_action')}
+                  </button>
                 </div>
               </div>
             </div>
+            <div className="card-body">
 
-            <div className="row">
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label className="m-0 required">{i18n.t('admin_edit.name')}</label>
-                  <input type="text"
-                         name="name"
-                         className="form-control"
-                         onChange={this.changeString('name')}
-                         value={model.name || ''}/>
-                  {this.getError('name')}
+              {serverErrors.length > 0 && <div className="alert alert-danger">
+                <ul className="simple">{serverErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>
+              </div>}
+
+              <div className="row">
+                <div className="col-12">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('admin_edit.email')}</label>
+                    <input type="email"
+                           name="email"
+                           className="form-control"
+                           onChange={this.changeString('email')}
+                           value={model.email || ''}/>
+                    {this.getError('email')}
+                  </div>
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label className="m-0 required">{i18n.t('admin_edit.surname')}</label>
-                  <input type="text"
-                         name="surname"
-                         className="form-control"
-                         onChange={this.changeString('surname')}
-                         value={model.surname || ''}/>
-                  {this.getError('surname')}
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('admin_edit.name')}</label>
+                    <input type="text"
+                           name="name"
+                           className="form-control"
+                           onChange={this.changeString('name')}
+                           value={model.name || ''}/>
+                    {this.getError('name')}
+                  </div>
+                </div>
+
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('admin_edit.surname')}</label>
+                    <input type="text"
+                           name="surname"
+                           className="form-control"
+                           onChange={this.changeString('surname')}
+                           value={model.surname || ''}/>
+                    {this.getError('surname')}
+                  </div>
                 </div>
               </div>
+
             </div>
-
           </div>
         </div>
-      </div>
 
-      <div className="col-12">
-        <div className="card shadow-sm mb-3">
-          <div className="card-header">
-            <div className="row">
-              <div className="col">
-                <h3 className="m-0">{i18n.t('admin_edit.security_title')}</h3>
+        <div className="col-12">
+          <div className="card shadow-sm mb-3">
+            <div className="card-header">
+              <div className="row">
+                <div className="col">
+                  <h3 className="m-0">{i18n.t('admin_edit.security_title')}</h3>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="card-body">
+            <div className="card-body">
 
-            <div className="row">
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label className="m-0 required">{i18n.t('admin_edit.password1')}</label>
-                  <input type="password"
-                         className="form-control"
-                         onChange={this.changeString('password1')}
-                         value={model.password1 || ''}/>
-                  {this.getError('password1')}
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('admin_edit.password1')}</label>
+                    <input type="password"
+                           className="form-control"
+                           onChange={this.changeString('password1')}
+                           value={model.password1 || ''}/>
+                    {this.getError('password1')}
+                  </div>
                 </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label className="m-0 required">{i18n.t('admin_edit.password2')}</label>
-                  <input type="password"
-                         className="form-control"
-                         onChange={this.changeString('password2')}
-                         value={model.password2 || ''}/>
-                  {this.getError('password2')}
-                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    <label className="m-0 required">{i18n.t('admin_edit.password2')}</label>
+                    <input type="password"
+                           className="form-control"
+                           onChange={this.changeString('password2')}
+                           value={model.password2 || ''}/>
+                    {this.getError('password2')}
+                  </div>
 
+                </div>
               </div>
             </div>
           </div>

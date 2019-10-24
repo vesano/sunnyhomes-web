@@ -12,18 +12,60 @@ router.get('/booking', isOwner, async (req, res) => {
 
     const apartmentId = req.user.user.property.propertyId
 
-    axios.get(`https://login.smoobu.com/api/apartment/${apartmentId}/booking`, {
+    const axiosConfig = {
       headers: {
         "Api-Key": parameters.smoobu.apiKey,
         "Cache-Control": 'no-cache'
       }
-    }).then(({data}) => {
+    }
 
-      res.status(200).json(data)
+    let bookings
 
-    }).catch(e => {
-      res.status(e.response.status).json(e.response.data)
-    })
+    const onComplete = () => {
+      res.status(200).json({
+        bookings,
+        count: bookings.length
+      })
+    }
+
+    axios.get(`https://login.smoobu.com/api/apartment/${apartmentId}/booking`, axiosConfig)
+      .then(({data}) => {
+
+        const promises = []
+
+        bookings = data.bookings
+
+        if (data.page < data.page_count) {
+
+          for (let page = 2; page <= data.page_count; page++) {
+            promises.push(
+              axios.get(`https://login.smoobu.com/api/apartment/${apartmentId}/booking?page=${page}`, axiosConfig)
+            )
+          }
+
+          Promise.all(promises)
+            .then(responses => {
+
+              responses.forEach(({data}) => {
+
+                bookings = [...bookings, ...data.bookings]
+
+              })
+
+              onComplete()
+
+            })
+            .catch(e => {
+              res.status(e.response.status).json(e.response.data)
+            })
+        } else {
+          onComplete()
+        }
+
+      })
+      .catch(e => {
+        res.status(e.response.status).json(e.response.data)
+      })
 
 
   } catch (e) {
@@ -64,7 +106,7 @@ router.post('/booking', isOwner, async (req, res) => {
     const owner = req.user.user;
 
     const apartmentId = owner.property.propertyId
-    const channelId = owner.property.channelId
+    const channelId = parameters.smoobu.channelId
 
     const data = {
       channelId,

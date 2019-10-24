@@ -46,31 +46,33 @@ class Owners extends React.Component {
 
   render() {
 
-    return <div className="row">
-      <div className="col-12">
-        <div className="card shadow-sm my-3">
-          <div className="card-header">
-            <div className="row">
-              <div className="col">
-                <h3 className="m-0">{i18n.t('owners.title')}</h3>
-              </div>
-              <div className="col-12 col-md-auto text-right">
-                <Link className="btn btn-primary transition-3d-hover"
-                      to={Pages.OWNERS_NEW}>
-                  <i className="fa fa-plus"/>&nbsp;{i18n.t('owners.new_action')}
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="card-body">
-            <div className="row">
-              <div className="col-12">
-                {this.renderContent()}
+    return <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="card shadow-sm my-3">
+            <div className="card-header">
+              <div className="row">
+                <div className="col">
+                  <h3 className="m-0">{i18n.t('owners.title')}</h3>
+                </div>
+                <div className="col-12 col-md-auto text-right">
+                  <Link className="btn btn-primary transition-3d-hover"
+                        to={Pages.OWNERS_NEW}>
+                    <i className="fa fa-plus"/>&nbsp;{i18n.t('owners.new_action')}
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="row my-2">
-              <div className="col-auto mx-auto">
-                {this.renderPagination()}
+            <div className="card-body">
+              <div className="row">
+                <div className="col-12">
+                  {this.renderContent()}
+                </div>
+              </div>
+              <div className="row my-2">
+                <div className="col-auto mx-auto">
+                  {this.renderPagination()}
+                </div>
               </div>
             </div>
           </div>

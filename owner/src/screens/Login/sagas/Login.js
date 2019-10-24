@@ -1,34 +1,42 @@
-import {all, takeLatest, put} from 'redux-saga/effects'
+import {all, takeLatest, put, select} from 'redux-saga/effects'
 import {replace} from 'connected-react-router'
 import Cookie from 'js-cookie'
 import * as Actions from '../actions'
 import * as Pages from '../../../router/Pages'
 
-function* saveToken({payload}) {
+function* saveTokenAndRedirect({payload}) {
 
-    Cookie.set('token', payload.token)
+  Cookie.set('token', payload.token)
 
-    yield put(replace(Pages.HOME))
+  yield put(replace(Pages.HOME))
+}
+
+function* saveTokenAndReload({payload}) {
+
+  Cookie.set('token', payload.token)
+
+  const pathname = yield select(store => store.router.location.pathname)
+
+  yield put(replace(pathname))
 }
 
 function* removeToken() {
 
-    Cookie.remove('token')
+  Cookie.remove('token')
 
-    yield put(replace(Pages.LOGIN))
+  yield put(replace(Pages.LOGIN))
 }
 
 export default function* sagas() {
-    yield all([
+  yield all([
 
-        takeLatest([
-            Actions.LOGIN_SUCCESS,
-            Actions.LOGIN_CHECK_SUCCESS,
-        ], saveToken),
+    takeLatest(Actions.LOGIN_SUCCESS, saveTokenAndRedirect),
 
-        takeLatest([
-            Actions.LOGOUT,
-            Actions.LOGIN_CHECK_FAILURE,
-        ], removeToken)
-    ])
+    takeLatest(Actions.LOGIN_CHECK_SUCCESS, saveTokenAndReload),
+
+    takeLatest([
+      Actions.LOGOUT,
+      Actions.LOGIN_CHECK_FAILURE,
+    ], removeToken)
+  ])
 }
