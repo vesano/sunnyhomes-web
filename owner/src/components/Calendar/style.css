@@ -11,11 +11,11 @@
 }
 
 .calendar-container .read-only-calendar-event {
-    background-color: #ff525c;
+    background-color: #58bb4b;
     color: white
 }
 
 .calendar-container .active-calendar-event {
-    background-color: #58bb4b;
+    background-color: #ff525c;
     color: white
 }
