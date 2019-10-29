@@ -28,7 +28,7 @@
       "name": "Property name"
     },
     "property_title": "Property",
-    "title": "My profile",
+    "title": "Your data",
     "security_title": "Security",
     "password1": "New password",
     "password2": "Repeat new password"
@@ -37,8 +37,8 @@
     "cancel_action": "Cancel",
     "remove_action": "Remove",
     "create_action": "Save",
-    "arrivalDate": "Arrival date",
-    "departureDate": "Departure date",
+    "arrivalDate": "Block date start",
+    "departureDate": "Block date end",
     "title": "Your reservation"
   },
   "placeholder": {
@@ -52,14 +52,14 @@
     "weak_password1": "Password is too weak"
   },
   "footer": {
-    "copyright": "Copyright"
+    "copyright": "SunnyHomes Cyprus"
   },
   "notification": {
     "remove_success": "Removed!",
     "save_success": "Saved!"
   },
   "login": {
-    "title": "Welcome, owner",
+    "title": "Welcome to the SunnyHomes Owner Login",
     "login": "Email",
     "placeholder": "Enter email",
     "password": "Password",
